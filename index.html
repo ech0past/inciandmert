@@ -166,6 +166,10 @@
   background-color: #333;
 }
 
+#sarkiBaslik {
+  margin-bottom: 10px; /* istediğin kadar artırabilirsin, örneğin 20px */
+}
+
     </style>
   </head>
   <body>
@@ -240,7 +244,9 @@
       });
     </script>
   
-<div id="sesKontrolKapsayici" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 10px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 1000; text-align: center; background: transparent; padding: 8px 0;">
+  
+  
+<div id="sesKontrolKapsayici" style="display: none; flex-direction: row; justify-content: center; align-items: center; gap: 10px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 1000; text-align: center; background: transparent; padding: 8px 0;">
   <div id = "sarkiBaslik" style="color: white; font-size: 19px; font-weight: bold; text-shadow: 2px 2px 4px black; margin-right: 15px; white-space: nowrap;">
     🎧 Tatlıyla Balla - Yalın 🎧
   </div>
@@ -252,14 +258,14 @@
   </button>
 </div>
 
-
+<audio id="sarki" src="img/sarki.mp3"></audio>
 
 <script>
   const sarki = document.getElementById("sarki");
   const sesKapatBtn = document.getElementById("sesKapat");
   const sarkiDegistirBtn = document.getElementById("sarkiDegistir");
   const sesKontrolKapsayici = document.getElementById("sesKontrolKapsayici");
-  const sarkiBaslik = sesKontrolKapsayici.querySelector("div"); 
+  const sarkiBaslik = document.getElementById("sarkiBaslik");
   sarkiBaslik.style.whiteSpace = "nowrap";
   
   let sesCaliyor = false;
