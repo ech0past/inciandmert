@@ -1,0 +1,266 @@
+  <!DOCTYPE html>
+  <html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>İNCİŞKOMA ASKİMA BİRTANEMEEE</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+  
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        overflow: hidden;
+        background-color: #fff0f5;
+      }
+  
+      #uyari {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        color: red;
+        text-align: center;
+        z-index: 999;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+      }
+  
+      #icerik {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+        padding: 20px;
+        z-index: 2;
+      }
+  
+      #soru {
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+  
+      .butonlar {
+        display: flex;
+        justify-content: space-around;
+        gap: 20px;
+        margin-top: 0px;
+      }
+  
+      button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      border: none;
+      border-radius: 8px;
+    }
+  
+      #cevap {
+        display: none;
+        position: absolute;
+        top: 45%;
+        width: 100%;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px 4px black;
+        animation: renkDegisimi 5s infinite;
+        z-index: 2;
+      }
+  
+      #mesaj {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 500px;
+        padding: 10px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px 4px black;
+        z-index: 2;
+      }
+      
+    #evet {
+    background-color: green;
+    color: white;
+    border: none;
+  }
+  
+  
+      #hayir {
+        background-color: red;
+        color: white;
+        position: center;
+        left: 20%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+  
+  
+      @keyframes renkDegisimi {
+        0% { color: red; }
+        20% { color: orange; }
+        40% { color: yellow; }
+        60% { color: green; }
+        80% { color: blue; }
+        100% { color: violet; }
+      }
+  
+      #arka {
+        display: none;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+    </style>
+  </head>
+  <body>
+  
+    <div id="uyari">Maalesef ki site yatay pozisyon desteklemiyor lütfen dikey yap :((</div>
+  
+    <div id="icerik">
+        <img src="img/kedi.gif" alt="Gif" style="width: 150px; margin-bottom: -30px;">
+      <h1 id="soru">pst baksana.. Beni seviyon muuu??</h1>
+      <div class="butonlar">
+        <button id="evet">Evet</button>
+        <button id="hayir">Hayır</button>
+      </div>
+    </div>
+  
+    <div id="cevap">Bende seni çok seviyorum!</div>
+    <div id="mesaj">
+      İncim aşkım birtanem bende seni çok seviyorum. Bu hiçbir zaman da değişmeyecek.  
+      Senin bir mutluluğun, bir gülüşün için her şeyi yaparım.  
+      İyi ki varsın canım sevgilim, iyi ki bugünlerimi senle geçiriyorum.  
+      İnşallah her zaman da birlikte geçiririz.  
+      Beni bazen deli ediyon, sinirlendiriyon, üzüyon, mutlu edi- ohh yoruldum...  
+      Her neyse ben seni her zaman seveceğim.  
+      Bana ne yaşatırsan yaşat seni hiçbir zaman bırakmayacağım.
+    </div>
+  
+    <img id="arka" src="img/inciandme.jpg" alt="Arka Plan">
+  
+    <script>
+      const evetBtn = document.getElementById("evet");
+      const hayirBtn = document.getElementById("hayir");
+      const cevapDiv = document.getElementById("cevap");
+      const mesajDiv = document.getElementById("mesaj");
+      const soru = document.getElementById("soru");
+      const icerik = document.getElementById("icerik");
+      const uyari = document.getElementById("uyari");
+      const arka = document.getElementById("arka");
+  
+      function konumuKontrolEt() {
+        if (window.innerWidth > window.innerHeight) {
+          uyari.style.display = "block";
+          icerik.style.display = "none";
+          cevapDiv.style.display = "none";
+          mesajDiv.style.display = "none";
+          arka.style.display = "none";
+        } else {
+          uyari.style.display = "none";
+          if (!cevapDiv.style.display || cevapDiv.style.display === "none") {
+            icerik.style.display = "flex";
+          } else {
+            cevapDiv.style.display = "block";
+            mesajDiv.style.display = "block";
+            arka.style.display = "block";
+          }
+        }
+      }
+  
+      window.onload = konumuKontrolEt;
+      window.addEventListener("resize", konumuKontrolEt);
+      window.addEventListener("orientationchange", konumuKontrolEt);
+  
+      evetBtn.addEventListener("click", () => {
+        icerik.style.display = "none";
+        cevapDiv.style.display = "block";
+        mesajDiv.style.display = "block";
+        arka.style.display = "block";
+      });
+  
+          hayirBtn.addEventListener("mousemove", () => {
+        const delta = 170;
+        // Mevcut pozisyonu hesapla:
+        const rect = hayirBtn.getBoundingClientRect();
+  
+        let newLeft = rect.left + (Math.random() * delta * 2 - delta);
+        let newTop = rect.top + (Math.random() * delta * 2 - delta);
+  
+        const maxX = window.innerWidth - hayirBtn.offsetWidth;
+        const maxY = window.innerHeight - hayirBtn.offsetHeight;
+  
+        newLeft = Math.max(0, Math.min(maxX, newLeft));
+        newTop = Math.max(0, Math.min(maxY, newTop));
+  
+        hayirBtn.style.position = "fixed";
+        hayirBtn.style.transition = "left 0.3s ease, top 0.3s ease";
+        hayirBtn.style.left = newLeft + "px";
+        hayirBtn.style.top = newTop + "px";
+      });
+    </script>
+  
+  <audio id="sarki" src="img/sarki.mp3"></audio>
+
+<div id="sesKontrolKapsayici" style="position: fixed; top: 0px; left: 50%; transform: translateX(-50%); z-index: 1000; text-align: center; display: none;">
+  <div style="color: white; font-size: 18px; font-weight: bold; text-shadow: 2px 2px 4px black; margin-bottom: 8px;">
+    🎵 Tatlıyla Balla - Yalın 🎵
+  </div>
+  <button id="sesKapat" style="padding: 8px 16px; font-size: 16px; cursor: pointer; background-color: red; color: white; border: none; border-radius: 8px;">
+    Şarkıyı Kapat
+  </button>
+</div>
+
+<audio id="sarki" src="sarki.mp3"></audio>
+
+<script>
+  const sarki = document.getElementById("sarki");
+  const sesKapatBtn = document.getElementById("sesKapat");
+  const sesKontrolKapsayici = document.getElementById("sesKontrolKapsayici");
+  let sesCaliyor = false;
+
+  evetBtn.addEventListener("click", () => {
+    sarki.play().then(() => {
+      sesCaliyor = true;
+      sesKontrolKapsayici.style.display = "block";
+      sesKapatBtn.textContent = "Şarkıyı Kapat";
+    }).catch(e => console.error(e));
+  });
+
+  sesKapatBtn.addEventListener("click", () => {
+    if (sesCaliyor) {
+      sarki.pause();
+      sesCaliyor = false;
+      sesKapatBtn.textContent = "Şarkıyı Aç";
+    } else {
+      sarki.play().then(() => {
+        sesCaliyor = true;
+        sesKapatBtn.textContent = "Şarkıyı Kapat";
+      }).catch(e => console.error(e));
+    }
+  });
+</script>
+  
+  </body>
+  </html>
