@@ -141,7 +141,6 @@
   text-decoration: none;
   font-size: 18px;
   border-radius: 8px;
-  box-shadow: 2px 2px 4px black;
   transition: background-color 0.3s ease;
 }
 
@@ -221,26 +220,6 @@
         mesajDiv.style.display = "block";
         arka.style.display = "block";
       });
-  
-          hayirBtn.addEventListener("mousemove", () => {
-        const delta = 170;
-        // Mevcut pozisyonu hesapla:
-        const rect = hayirBtn.getBoundingClientRect();
-  
-        let newLeft = rect.left + (Math.random() * delta * 2 - delta);
-        let newTop = rect.top + (Math.random() * delta * 2 - delta);
-  
-        const maxX = window.innerWidth - hayirBtn.offsetWidth;
-        const maxY = window.innerHeight - hayirBtn.offsetHeight;
-  
-        newLeft = Math.max(0, Math.min(maxX, newLeft));
-        newTop = Math.max(0, Math.min(maxY, newTop));
-  
-        hayirBtn.style.position = "fixed";
-        hayirBtn.style.transition = "left 0.3s ease, top 0.3s ease";
-        hayirBtn.style.left = newLeft + "px";
-        hayirBtn.style.top = newTop + "px";
-      });
     </script>
   
   <audio id="sarki" src="img/sarki.mp3"></audio>
@@ -252,17 +231,34 @@
   <button id="sesKapat" style="padding: 8px 16px; font-size: 13px; cursor: pointer; background-color: red; color: white; border: none; border-radius: 8px;">
     Şarkıyı Kapat
   </button>
+  <button id="sarkiDegistir" style="padding: 8px 16px; font-size: 13px; cursor: pointer; background-color: #444; color: white; border: none; border-radius: 8px; margin-top: 10px;">
+  Şarkıyı Değiştir
+</button>
 </div>
 
-<audio id="sarki" src="sarki.mp3"></audio>
+
 
 <script>
   const sarki = document.getElementById("sarki");
   const sesKapatBtn = document.getElementById("sesKapat");
+  const sarkiDegistirBtn = document.getElementById("sarkiDegistir");
   const sesKontrolKapsayici = document.getElementById("sesKontrolKapsayici");
+  const sarkiBaslik = sesKontrolKapsayici.querySelector("div"); // başlığı bul
+  
   let sesCaliyor = false;
 
+  const sarkiListesi = [
+    { src: "img/yalın.mp3", baslik: "🎧 Tatlıyla Balla - Yalın 🎧" },
+    { src: "img/muslumgurses.mp3", baslik: "🎧 Seni Yazdım - Müslüm Gürses 🎧" },
+    { src: "img/barismanco.mp3", baslik: "🎧 Aynalı Kemer - Barış Manço 🎧" }
+  ];
+
+  let aktifSarkiIndex = 0;
+
   evetBtn.addEventListener("click", () => {
+    aktifSarkiIndex = 0;
+    sarki.src = sarkiListesi[aktifSarkiIndex].src;
+    sarkiBaslik.textContent = sarkiListesi[aktifSarkiIndex].baslik;
     sarki.play().then(() => {
       sesCaliyor = true;
       sesKontrolKapsayici.style.display = "block";
@@ -282,10 +278,39 @@
       }).catch(e => console.error(e));
     }
   });
-</script>
-  
- 
 
+  sarkiDegistirBtn.addEventListener("click", () => {
+    aktifSarkiIndex = (aktifSarkiIndex + 1) % sarkiListesi.length;
+    sarki.src = sarkiListesi[aktifSarkiIndex].src;
+    sarkiBaslik.textContent = sarkiListesi[aktifSarkiIndex].baslik;
+    if (sesCaliyor) {
+      sarki.play();
+    }
+  });
+</script>
+ 
+<script>
+  let hayirTiklamaSayisi = 0;
+
+  hayirBtn.addEventListener("click", () => {
+    hayirTiklamaSayisi++;
+
+    const yeniYazilar = [
+      "Bence seviyorsundur... Lütfen biraz daha düşünür müsün...",
+      "Şaka yapıyorsun değil mi? Bence yapıyorsun...",
+      "Son kez soruyorum, beni gerçekten sevmiyor musun??",
+      "Pekii, seni kendi iradene bırakıyorum..."
+    ];
+
+    if (hayirTiklamaSayisi <= 4) {
+      soru.textContent = yeniYazilar[hayirTiklamaSayisi - 1];
+    }
+
+    if (hayirTiklamaSayisi === 4) {
+      hayirBtn.style.display = "none";
+    }
+  });
+</script>
 
   
   </body>
