@@ -132,6 +132,23 @@
         object-fit: cover;
         z-index: 0;
       }
+      
+#videoButon {
+  margin-top: 30px;
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px black;
+  transition: background-color 0.3s ease;
+}
+
+#videoButon:hover {
+  background-color: #333;
+}
+
     </style>
   </head>
   <body>
@@ -141,10 +158,11 @@
     <div id="icerik">
         <img src="img/kedi.gif" alt="Gif" style="width: 150px; margin-bottom: -30px;">
       <h1 id="soru">pst baksana.. Beni seviyon muuu??</h1>
-      <div class="butonlar">
-        <button id="evet">Evet</button>
-        <button id="hayir">Hayır</button>
-      </div>
+ <div class="butonlar">
+  <button id="evet">Evet</button>
+  <button id="hayir">Hayır</button>
+</div>
+<a href="https://www.youtube.com/shorts/9kJf-Jvfdno?si=cdUQJzaMjzoUSa9-" target="_blank" id="videoButon">Sitenin Yapılış Videosu</a>
     </div>
   
     <div id="cevap">Bende seni çok seviyorum!</div>
@@ -169,6 +187,7 @@
       const icerik = document.getElementById("icerik");
       const uyari = document.getElementById("uyari");
       const arka = document.getElementById("arka");
+      const videoButon = document.getElementById("videoButon");
   
       function konumuKontrolEt() {
         if (window.innerWidth > window.innerHeight) {
@@ -177,6 +196,8 @@
           cevapDiv.style.display = "none";
           mesajDiv.style.display = "none";
           arka.style.display = "none";
+          
+          
         } else {
           uyari.style.display = "none";
           if (!cevapDiv.style.display || cevapDiv.style.display === "none") {
@@ -185,6 +206,7 @@
             cevapDiv.style.display = "block";
             mesajDiv.style.display = "block";
             arka.style.display = "block";
+            
           }
         }
       }
@@ -261,6 +283,10 @@
     }
   });
 </script>
+  
+ 
+
+
   
   </body>
   </html>
