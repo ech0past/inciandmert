@@ -134,10 +134,20 @@
       }
       
   
-#sesKontrolKapsayici div {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+#sesKontrolKapsayici {
+  display: flex;
+  flex-direction: row; /* Yatay dizilim */
+  justify-content: center; /* Ortala */
+  align-items: center;
+  gap: 10px; /* Butonlar arasında boşluk */
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  text-align: center;
+  background: transparent; /* istersen arkaplan ekle */
+  padding: 8px 0;
 }
 
       
