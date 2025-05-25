@@ -133,6 +133,12 @@
         z-index: 0;
       }
       
+  
+  #sesKontrolKapsayici div {
+    white-space: nowrap;
+  }
+
+      
 #videoButon {
   margin-top: 30px;
   background-color: blue;
@@ -243,7 +249,8 @@
   const sesKapatBtn = document.getElementById("sesKapat");
   const sarkiDegistirBtn = document.getElementById("sarkiDegistir");
   const sesKontrolKapsayici = document.getElementById("sesKontrolKapsayici");
-  const sarkiBaslik = sesKontrolKapsayici.querySelector("div"); // başlığı bul
+  const sarkiBaslik = sesKontrolKapsayici.querySelector("div"); 
+  sarkiBaslik.style.whiteSpace = "nowrap";
   
   let sesCaliyor = false;
 
