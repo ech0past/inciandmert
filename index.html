@@ -282,6 +282,29 @@ html, body {
 
   setInterval(updateLoveCounter, 1000);
   updateLoveCounter();
+
+
+  if ('serviceWorker' in navigator && 'PushManager' in window) {
+  navigator.serviceWorker.register('sw.js')
+    .then(swReg => {
+      console.log('Service Worker registered', swReg);
+
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          console.log('Bildirim izni verildi.');
+        } else {
+          console.log('Bildirim izni reddedildi.');
+        }
+      });
+    })
+    .catch(error => {
+      console.error('Service Worker kaydı başarısız:', error);
+    });
+} else {
+  console.warn('Tarayıcı push bildirimlerini desteklemiyor.');
+}
+
+  
 </script>
   
 
