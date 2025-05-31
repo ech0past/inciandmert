@@ -1,0 +1,353 @@
+  <!DOCTYPE html>
+  <html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>İNCİŞKOMA ASKİMA BİRTANEMEEE</title>
+  </head>
+  <body>
+  
+    <div id="uyari">Maalesef ki site yatay pozisyon desteklemiyor lütfen dikey yap :((</div>
+    <div id="icerik">
+        <img src="img/kedi.gif" alt="Gif" style="width: 150px; margin-bottom: -30px;">
+      <h1 id="soru">pst baksana.. Beni seviyon muuu??</h1>
+ <div class="butonlar">
+  <button id="evet">Evet</button>
+  <button id="hayir">Hayır</button>
+</div>
+<a href="https://www.youtube.com/shorts/9kJf-Jvfdno?si=cdUQJzaMjzoUSa9-" target="_blank" id="videoButon">Sitenin Yapılış Videosu</a>
+
+<div id="tasarimYazisi">Made with 💘 by Mert Bakır</div>
+    </div>
+  
+    <div id="cevap">Bende seni çok seviyorum!</div>
+    <div id="mesaj">
+      İncim aşkım birtanem bende seni çok seviyorum. Bu hiçbir zaman da değişmeyecek.  
+      Senin bir mutluluğun, bir gülüşün için her şeyi yaparım.  
+      İyi ki varsın canım sevgilim, iyi ki bugünlerimi senle geçiriyorum.  
+      İnşallah her zaman da birlikte geçiririz.  
+      Beni bazen deli ediyon, sinirlendiriyon, üzüyon, mutlu edi- ohh yazarken yoruldum...  
+      Her neyse ben seni her zaman seveceğim.  
+      Bana ne yaşatırsan yaşat seni hiçbir zaman bırakmayacağım.
+    </div>
+  
+    <img id="arka" src="img/inciandme.jpg" alt="Arka Plan">
+  
+  
+  
+<div id="sesKontrolKapsayici" style="display: none; flex-direction: row; justify-content: center; align-items: center; gap: 10px; position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 1000; text-align: center; background: transparent; padding: 8px 0;">
+  <div id = "sarkiBaslik" style="color: white; font-size: 19px; font-weight: bold; text-shadow: 2px 2px 4px black; margin-right: 15px; white-space: nowrap;">
+    🎧 Tatlıyla Balla - Yalın 🎧
+  </div>
+  <button id="sesKapat" style="padding: 8px 16px; font-size: 13px; cursor: pointer; background-color: red; color: white; border: none; border-radius: 8px;">
+    Şarkıyı Kapat
+  </button>
+  <button id="sarkiDegistir" style="padding: 8px 16px; font-size: 13px; cursor: pointer; background-color: #444; color: white; border: none; border-radius: 8px;">
+    Şarkıyı Değiştir
+  </button>
+</div>
+<audio id="sarki" src="img/sarki.mp3"></audio>
+
+<style>
+      * {
+        box-sizing: border-box;
+      }
+  
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        overflow: hidden;
+        background-color: #fff0f5;
+      }
+  
+      #uyari {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        color: red;
+        text-align: center;
+        z-index: 999;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+      }
+  
+      #icerik {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+        padding: 20px;
+        z-index: 2;
+      }
+  
+      #soru {
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+  
+      .butonlar {
+        display: flex;
+        justify-content: space-around;
+        gap: 20px;
+        margin-top: 0px;
+      }
+  
+      button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      border: none;
+      border-radius: 8px;
+    }
+  
+      #cevap {
+        display: none;
+        position: absolute;
+        top: 35%;
+        width: 100%;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px 4px black;
+        animation: renkDegisimi 5s infinite;
+        z-index: 2;
+      }
+  
+      #mesaj {
+        display: none;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 500px;
+        padding: 10px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px 4px black;
+        z-index: 2;
+      }
+      
+    #evet {
+    background-color: green;
+    color: white;
+    border: none;
+  }
+  
+  
+      #hayir {
+        background-color: red;
+        color: white;
+        position: center;
+        left: 20%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+  
+  
+      @keyframes renkDegisimi {
+        0% { color: red; }
+        20% { color: orange; }
+        40% { color: yellow; }
+        60% { color: green; }
+        80% { color: blue; }
+        100% { color: violet; }
+      }
+  
+      #arka {
+        display: none;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+      
+  
+#sesKontrolKapsayici {
+  display: flex;
+  flex-direction: row; /* Yatay dizilim */
+  justify-content: center; /* Ortala */
+  align-items: center;
+  gap: 10px; /* Butonlar arasında boşluk */
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  text-align: center;
+  background: transparent; /* istersen arkaplan ekle */
+  padding: 8px 0;
+}
+
+      
+#videoButon {
+  margin-top: 30px;
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+#videoButon:hover {
+  background-color: #333;
+}
+
+#sarkiBaslik {
+  margin-bottom: 10px; /* istediğin kadar artırabilirsin, örneğin 20px */
+}
+
+#tasarimYazisi {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.4); /* Opaklığı düşük siyah */
+  color: white;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  z-index: 3;
+  text-shadow: 1px 1px 3px black;
+}
+
+body, html {
+background-color: aqua;
+}  
+
+</style>
+
+<script>
+        const evetBtn = document.getElementById("evet");
+      const hayirBtn = document.getElementById("hayir");
+      const cevapDiv = document.getElementById("cevap");
+      const mesajDiv = document.getElementById("mesaj");
+      const soru = document.getElementById("soru");
+      const icerik = document.getElementById("icerik");
+      const uyari = document.getElementById("uyari");
+      const arka = document.getElementById("arka");
+      const videoButon = document.getElementById("videoButon");
+  
+      function konumuKontrolEt() {
+        if (window.innerWidth > window.innerHeight) {
+          uyari.style.display = "block";
+          icerik.style.display = "none";
+          cevapDiv.style.display = "none";
+          mesajDiv.style.display = "none";
+          arka.style.display = "none";
+          
+          
+        } else {
+          uyari.style.display = "none";
+          if (!cevapDiv.style.display || cevapDiv.style.display === "none") {
+            icerik.style.display = "flex";
+          } else {
+            cevapDiv.style.display = "block";
+            mesajDiv.style.display = "block";
+            arka.style.display = "block";
+            
+          }
+        }
+      }
+  
+      window.onload = konumuKontrolEt;
+      window.addEventListener("resize", konumuKontrolEt);
+      window.addEventListener("orientationchange", konumuKontrolEt);
+  
+      evetBtn.addEventListener("click", () => {
+        icerik.style.display = "none";
+        cevapDiv.style.display = "block";
+        mesajDiv.style.display = "block";
+        arka.style.display = "block";
+      });
+
+  const sarki = document.getElementById("sarki");
+  const sesKapatBtn = document.getElementById("sesKapat");
+  const sarkiDegistirBtn = document.getElementById("sarkiDegistir");
+  const sesKontrolKapsayici = document.getElementById("sesKontrolKapsayici");
+  const sarkiBaslik = document.getElementById("sarkiBaslik");
+  sarkiBaslik.style.whiteSpace = "nowrap";
+  
+  let sesCaliyor = false;
+
+  const sarkiListesi = [
+    { src: "img/yalın.mp3", baslik: "🎧 Tatlıyla Balla - Yalın 🎧" },
+    { src: "img/muslumgurses.mp3", baslik: "🎧 Seni Yazdım - Müslüm Gürses 🎧" },
+    { src: "img/barismanco.mp3", baslik: "🎧 Aynalı Kemer - Barış Manço 🎧" }
+  ];
+
+  let aktifSarkiIndex = 0;
+
+  evetBtn.addEventListener("click", () => {
+    aktifSarkiIndex = 0;
+    sarki.src = sarkiListesi[aktifSarkiIndex].src;
+    sarkiBaslik.textContent = sarkiListesi[aktifSarkiIndex].baslik;
+    sarki.play().then(() => {
+      sesCaliyor = true;
+      sesKontrolKapsayici.style.display = "block";
+      sesKapatBtn.textContent = "Şarkıyı Kapat";
+    }).catch(e => console.error(e));
+  });
+
+  sesKapatBtn.addEventListener("click", () => {
+    if (sesCaliyor) {
+      sarki.pause();
+      sesCaliyor = false;
+      sesKapatBtn.textContent = "Şarkıyı Aç";
+    } else {
+      sarki.play().then(() => {
+        sesCaliyor = true;
+        sesKapatBtn.textContent = "Şarkıyı Kapat";
+      }).catch(e => console.error(e));
+    }
+  });
+
+  sarkiDegistirBtn.addEventListener("click", () => {
+    aktifSarkiIndex = (aktifSarkiIndex + 1) % sarkiListesi.length;
+    sarki.src = sarkiListesi[aktifSarkiIndex].src;
+    sarkiBaslik.textContent = sarkiListesi[aktifSarkiIndex].baslik;
+    if (sesCaliyor) {
+      sarki.play();
+    }
+  });
+ 
+  let hayirTiklamaSayisi = 0;
+
+  hayirBtn.addEventListener("click", () => {
+    hayirTiklamaSayisi++;
+
+    const yeniYazilar = [
+      "Bence seviyorsundur... Lütfen biraz daha düşünür müsün...",
+      "Şaka yapıyorsun değil mi? Bence yapıyorsun...",
+      "Son kez soruyorum, beni gerçekten sevmiyor musun??",
+      "Pekii, seni kendi iradene bırakıyorum..."
+    ];
+
+    if (hayirTiklamaSayisi <= 4) {
+      soru.textContent = yeniYazilar[hayirTiklamaSayisi - 1];
+    }
+
+    if (hayirTiklamaSayisi === 4) {
+      hayirBtn.style.display = "none";
+    }
+  });
+</script>
+  </body>
+  </html>
