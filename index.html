@@ -203,13 +203,13 @@
       gap: 40px;
       margin-bottom: 20px;
       position: relative;
-      border-bottom: 2px solid #ccc;
+      border-bottom: 2px solid gray;
     }
 
     .subcategory {
       font-weight: bold;
       font-size: 18px;
-      color: #444;
+      color: gray;
       padding-bottom: 5px;
       cursor: pointer;
       position: relative;
@@ -269,13 +269,13 @@
 
 <div class="categories">
   <div class="category" onclick="openModal()">
-    <img src="img/incimerdo.jpg" alt="Kategori 1" />
+    <img src="img/kategori1.jpg" alt="Kategori 1" />
     <span class="category-name">MERT&İNCUUU</span>
   </div>
-  <div class="category">
-    <img src="img/elis.jpg" alt="Kategori 2" />
-    <span class="category-name">JOJUGLARIMIZ</span>
-  </div>
+  <div class="category" onclick="openModal2()">
+  <img src="img/elis.jpg" alt="Kategori 2" />
+  <span class="category-name">JOJUGLARIMIZ</span>
+</div>
   <div class="category" onclick="location.href='login.html'">
     <img src="img/secret.jpg" alt="SECRET!!" />
     <span class="category-name">SECRET!!</span>
@@ -305,6 +305,23 @@
 
     <div class="modal-text" id="modalText">
        Coming Soon
+    </div>
+  </div>
+</div>
+
+<!-- 2. Kategori Modal HTML -->
+<div id="modalOverlay2" class="modal-overlay" onclick="closeModal2(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close-button" onclick="closeModal2(event)">×</span>
+
+    <div class="subcategory-tabs" id="subcategoryTabs2">
+      <div class="subcategory active" data-name="pengu" onclick="selectSubcategory2(event)">Pengü</div>
+      <div class="subcategory" data-name="elis" onclick="selectSubcategory2(event)">Elis</div>
+      <div class="underline" id="underline2"></div>
+    </div>
+
+    <div class="modal-text" id="modalText2">
+      Pengü bir penguen, evet yanlış duymadınız İnci bir penguen doğurdu.<br>Pengü 14/02/2025 tarihinde Primemall yakınlarında bir parkta doğdu. Pengü şuan annesinde kalıyor ve günün hemen hemen hepsinde uyuyor. Uyanık olduğunu görmek gerçekten çok zor...<br>Her neyse...<br>Pengü, Elis'in abisidir ve Elis onun tek kardeşidir. Pengü'yü annesi, babası, kardeşi Elis, arkadaşları herkes çok sever. Fakat Pengü annesinden bazen zorlama, bazen de press görüyor. Press derken gerçekten press, üstten bastırılıyor. Dümdüz oluyor hayvancağız. Pengü'nün herşeyi iyi güzel ama Pengü'nün bir kusuru vardı, sadece UYUMASI...
     </div>
   </div>
 </div>
@@ -412,6 +429,59 @@
   window.addEventListener('resize', () => {
     moveUnderlineToActive();
   });
+  
+  function openModal2() {
+  const modal = document.getElementById('modalOverlay2');
+  modal.style.display = 'flex';
+  setTimeout(() => {
+    moveUnderlineToActive2();
+  }, 10);
+}
+
+function closeModal2(event) {
+  const modal = document.getElementById('modalOverlay2');
+  if (event.target === modal || event.target.classList.contains('close-button')) {
+    modal.style.display = 'none';
+  }
+}
+
+function selectSubcategory2(event) {
+  const clicked = event.target;
+  if (!clicked.classList.contains('subcategory')) return;
+
+  const tabs = document.querySelectorAll('#subcategoryTabs2 .subcategory');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  clicked.classList.add('active');
+
+  moveUnderlineToActive2();
+
+  const name = clicked.getAttribute('data-name');
+  const modalText = document.getElementById('modalText2');
+
+  if(name === 'pengu') {
+  modalText.innerHTML = "Pengü bir penguen, evet yanlış duymadınız İnci bir penguen doğurdu.<br>Pengü 14/02/2025 tarihinde Primemall yakınlarında bir parkta doğdu. Pengü şuan annesinde kalıyor ve günün hemen hemen hepsinde uyuyor. Uyanık olduğunu görmek gerçekten çok zor...<br>Her neyse...<br>Pengü, Elis'in abisidir ve Elis onun tek kardeşidir. Pengü'yü annesi, babası, kardeşi Elis, arkadaşları herkes çok sever. Fakat Pengü annesinden bazen zorlama, bazen de press görüyor. Press derken gerçekten press, üstten bastırılıyor. Dümdüz oluyor hayvancağız. Pengü'nün herşeyi iyi güzel ama Pengü'nün bir kusuru vardı, sadece UYUMASI...";
+  } else if(name === 'elis') {
+    modalText.innerHTML = "Hayır hayır Elis penguen veya herhangi bir hayvan değil. Olsaydı da şaşırmamanız gereken bir konu beence...<br>Anywaaays<br> Elis 1 Mayıs 2025 tarihinde doğdu. Bu sefer İnci insan doğurdu. (çok şükür) Elis, Pengü'nün kız kardeşidir. Elis şuanda Babasıyla yaşamaktadır. Babasıyla birlikte hemen hemen heryere gitmektedirler. Babası yazılı sınavı çözerken, deneme çözerken, test çözerken, ders çalışırken izlemeyi çok sever. En sevdiği aktivitedir. Aynı zamanda Elisin en sevdiği yer babasının kalem cüzdanıdır. Normalde sığmaması gerekiyor ama yeni doğduğu için sığıyor...";
+  }
+}
+
+function moveUnderlineToActive2() {
+  const activeTab = document.querySelector('#subcategoryTabs2 .subcategory.active');
+  const underline = document.getElementById('underline2');
+  if (!activeTab || !underline) return;
+
+  const container = document.getElementById('subcategoryTabs2');
+  const containerRect = container.getBoundingClientRect();
+  const activeRect = activeTab.getBoundingClientRect();
+
+  const left = activeRect.left - containerRect.left + (activeRect.width - underline.offsetWidth)/2;
+  underline.style.left = left + 'px';
+}
+
+window.addEventListener('resize', () => {
+  moveUnderlineToActive();
+  moveUnderlineToActive2();
+});
 </script>
 
 </body>
