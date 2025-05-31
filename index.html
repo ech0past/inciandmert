@@ -138,7 +138,7 @@ html, body {
 </style>
 
 
-
+<div class="caption" id="love-counter-caption"></div>
   <div class="announcement-section">
     <div class="nav-button" onclick="prevSlide()">&lt;</div>
     <div class="slider">
@@ -149,7 +149,7 @@ html, body {
         </div>
         <div class="slide">
           <img src="img/favfoto.PNG" alt="Duyuru 2" />
-          <div class="caption">Favori Fotoğrafımız 📸</div>
+           <div class="caption" id="love-counter-caption"></div>
         </div>
         <div class="slide">
           <img src="img/ilkfoto.jpg" alt="Duyuru 3" />
@@ -160,7 +160,8 @@ html, body {
     <div class="nav-button" onclick="nextSlide()">&gt;</div>
   </div>
 
-<div class="categories">
+  
+  <div class="categories">
   <div class="category">
     <img src="img/favfoto.PNG" alt="Kategori 1" />
     <span class="category-name">inciandMEEE</span>
@@ -262,6 +263,28 @@ html, body {
   window.addEventListener("resize", () => {
     showSlide(index);
   });
+
+   function updateLoveCounter() {
+    const startDate = new Date("2023-09-19T00:00:00");
+    const now = new Date();
+    let diff = now - startDate;
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30.4375);
+    const remainingDays = Math.floor(days % 30.4375);
+
+    const display = `${months} ay, ${remainingDays} gün, ${hours % 24} saat, ${minutes % 60} dakika, ${seconds % 60} saniyedir sevgiliyiz`;
+    const el = document.getElementById("love-counter-caption");
+    if (el) el.textContent = display;
+  }
+
+  setInterval(updateLoveCounter, 1000);
+  updateLoveCounter();
+
+  
 </script>
 
 </body>
