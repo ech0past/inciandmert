@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mert&İnci</title>
   <style>
-html, body {
-  height: 100%;
-  margin: 0;
-  background: linear-gradient(180deg, aqua 0%, darkblue 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-family: Arial, sans-serif;
-}
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: linear-gradient(180deg, aqua 0%, darkblue 100%);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+    }
+
     .announcement-section {
       width: 100%;
       margin-top: 50px;
@@ -33,6 +34,8 @@ html, body {
       justify-content: center;
       cursor: pointer;
       user-select: none;
+      position: relative;
+      z-index: 2;
     }
 
     .slider {
@@ -76,24 +79,67 @@ html, body {
       display: flex;
       justify-content: center;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     .category {
+      position: relative;
       width: 120px;
       height: 120px;
-      border: 2px solid aqua;
+      border: 3px solid aqua;
       border-radius: 5px;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
       cursor: pointer;
-      transition: 0.3s;
-      text-align: center;
     }
 
-    .category:hover {
-      background-color: #e0ffff;
+    .category img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .category-name {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+      pointer-events: none;
+      text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+      user-select: none;
+    }
+
+    .spotify-player {
+      margin: 30px auto;
+      width: 400px;
+    }
+
+    @media (max-width: 400px) {
+      .spotify-player {
+        width: 100%;
+      }
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: transparent;
+    }
+
+    .left-text, .right-text {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 18px;
+      color: black;
     }
   </style>
 </head>
@@ -104,44 +150,26 @@ html, body {
   <div class="right-text">19/09/2024</div>
 </div>
 
-<style>
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 30px;
-    background-color: transparent; /* arkaplan yok */
-  }
-
-  .left-text, .right-text {
-    font-weight: bold;
-    font-style: italic;
-    font-size: 18px;
-    color: black; /* yazılar siyah */
-  }
-</style>
-
-
-
-  <div class="announcement-section">
-    <div class="nav-button" onclick="prevSlide()">&lt;</div>
-    <div class="slider">
-      <div class="slides" id="slides">
-        <div class="slide">
-          <img src="img/pengu.jpg" alt="Duyuru 1" />
-          <div class="caption">Penguenlerle İlk Tatilimiz 🐧</div>
-        </div>
-        <div class="slide">
-          <img src="img/favfoto.PNG" alt="Duyuru 2" />
-          <div class="caption">Favori Fotoğrafımız 📸</div>
-        </div>
-        <div class="slide">
-          <img src="img/ilkfoto.jpg" alt="Duyuru 3" />
-          <div class="caption">İlk Buluşmamız ❤️</div>
-        </div>
+<div class="announcement-section">
+  <div class="nav-button" onclick="prevSlide()">&lt;</div>
+  <div class="slider">
+    <div class="slides" id="slides">
+      <div class="slide">
+        <img src="img/pengu.jpg" alt="Duyuru 1" />
+        <div class="caption">Penguenlerle İlk Tatilimiz 🐧</div>
+      </div>
+      <div class="slide">
+        <img src="img/favfoto.PNG" alt="Duyuru 2" />
+        <div class="caption">Favori Fotoğrafımız 📸</div>
+      </div>
+      <div class="slide">
+        <img src="img/ilkfoto.jpg" alt="Duyuru 3" />
+        <div class="caption">İlk Buluşmamız ❤️</div>
       </div>
     </div>
-    <div class="nav-button" onclick="nextSlide()">&gt;</div>
   </div>
+  <div class="nav-button" onclick="nextSlide()">&gt;</div>
+</div>
 
 <div class="categories">
   <div class="category">
@@ -152,50 +180,12 @@ html, body {
     <img src="img/pengu.jpg" alt="Kategori 2" />
     <span class="category-name">PENGÜÜÜÜÜÜ</span>
   </div>
-<div class="category" onclick="location.href='login.html'">
-  <img src="img/ilkfoto.jpg" alt="SECRET!!" />
-  <span class="category-name">SECRET!!</span>
+  <div class="category" onclick="location.href='login.html'">
+    <img src="img/ilkfoto.jpg" alt="SECRET!!" />
+    <span class="category-name">SECRET!!</span>
+  </div>
 </div>
-</div>
 
-<style>
-  .category {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    border: 3px solid aqua; /* biraz daha kalın */
-    border-radius: 5px;
-    overflow: hidden;
-    cursor: pointer;
-  }
-
-  .category img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .category-name {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    pointer-events: none;
-    text-shadow:
-      -1px -1px 0 #000,
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-      1px 1px 0 #000; /* siyah anahat */
-    user-select: none;
-  }
-</style>
-
-<!-- Kategorilerin altına ekle -->
 <div class="spotify-player">
   <iframe 
     src="https://open.spotify.com/embed/playlist/6oxtSVvay1slXpJNuRp2ZJ"
@@ -207,38 +197,25 @@ html, body {
   </iframe>
 </div>
 
-<style>
-  .spotify-player {
-    margin: 30px auto;
-    width: 400px;
+<script>
+  const slides = document.getElementById('slides');
+  const slideCount = slides.children.length;
+  let index = 0;
+  let interval = setInterval(nextSlide, 10000);
+
+  function showSlide(i) {
+    index = (i + slideCount) % slideCount;
+    slides.style.transform = `translateX(-${index * 400}px)`;
   }
 
-  @media (max-width: 400px) {
-    .spotify-player {
-      width: 100%;
-    }
+  function nextSlide() {
+    showSlide(index + 1);
   }
-</style>
 
-  <script>
-    const slides = document.getElementById('slides');
-    const slideCount = slides.children.length;
-    let index = 0;
-    let interval = setInterval(nextSlide, 10000);
-
-    function showSlide(i) {
-      index = (i + slideCount) % slideCount;
-      slides.style.transform = `translateX(-${index * 400}px)`;
-    }
-
-    function nextSlide() {
-      showSlide(index + 1);
-    }
-
-    function prevSlide() {
-      showSlide(index - 1);
-    }
-  </script>
+  function prevSlide() {
+    showSlide(index - 1);
+  }
+</script>
 
 </body>
 </html>
