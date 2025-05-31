@@ -22,18 +22,35 @@ html, body {
       align-items: center;
     }
 
-    .nav-button {
-      width: 40px;
-      height: 400px;
-      background-color: rgba(0, 0, 0, 0.3);
-      color: white;
-      font-size: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-    }
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: #00ffff;
+}
+
+.left-text, .right-text {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 20px;
+  color: black;
+}
+
+.nav-button {
+  width: 40px;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  z-index: 2;
+}
 
     .slider {
       width: 400px;
