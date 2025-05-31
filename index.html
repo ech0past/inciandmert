@@ -138,14 +138,13 @@ html, body {
 </style>
 
 
-<div class="caption" id="love-counter-caption"></div>
   <div class="announcement-section">
     <div class="nav-button" onclick="prevSlide()">&lt;</div>
     <div class="slider">
       <div class="slides" id="slides">
         <div class="slide">
           <img src="img/pengu.jpg" alt="Duyuru 1" />
-          <div class="caption">Penguenlerle İlk Tatilimiz 🐧</div>
+          <div class="caption">🐧PENGÜ🐧</div>
         </div>
         <div class="slide">
           <img src="img/favfoto.PNG" alt="Duyuru 2" />
@@ -163,15 +162,15 @@ html, body {
   
   <div class="categories">
   <div class="category">
-    <img src="img/favfoto.PNG" alt="Kategori 1" />
-    <span class="category-name">inciandMEEE</span>
+    <img src="img/kategori1.jpg" alt="Kategori 1" />
+    <span class="category-name">MERT&İNCUUU</span>
   </div>
   <div class="category">
     <img src="img/pengu.jpg" alt="Kategori 2" />
-    <span class="category-name">PENGÜÜÜÜÜÜ</span>
+    <span class="category-name">JOJUGLARIMIZ</span>
   </div>
 <div class="category" onclick="location.href='login.html'">
-  <img src="img/ilkfoto.jpg" alt="SECRET!!" />
+  <img src="img/secret.jpg" alt="SECRET!!" />
   <span class="category-name">SECRET!!</span>
 </div>
 </div>
@@ -264,8 +263,8 @@ html, body {
     showSlide(index);
   });
 
-   function updateLoveCounter() {
-    const startDate = new Date("2023-09-19T00:00:00");
+  function updateLoveCounter() {
+    const startDate = new Date("2024-09-19T00:20:34");
     const now = new Date();
     let diff = now - startDate;
 
@@ -276,16 +275,15 @@ html, body {
     const months = Math.floor(days / 30.4375);
     const remainingDays = Math.floor(days % 30.4375);
 
-    const display = `${months} ay, ${remainingDays} gün, ${hours % 24} saat, ${minutes % 60} dakika, ${seconds % 60} saniyedir sevgiliyiz`;
+    const display = `${months} ay, ${remainingDays} gün, ${hours % 24} saat, ${minutes % 60} dakika, ${seconds % 60} saniye ❤️`;
     const el = document.getElementById("love-counter-caption");
     if (el) el.textContent = display;
   }
 
   setInterval(updateLoveCounter, 1000);
   updateLoveCounter();
-
-  
 </script>
+  
 
 </body>
 </html>
