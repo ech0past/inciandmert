@@ -1,14 +1,9 @@
 self.addEventListener('push', event => {
-  const data = event.data ? event.data.json() : {};
-
-  const title = data.title || 'Bildirim Başlığı';
+  const data = event.data.json();
+  const title = data.title || 'Bildirim';
   const options = {
-    body: data.body || 'Bildirim içeriği',
-    icon: data.icon || 'img/icon.png', // varsa ikon yolu
-    badge: data.badge || 'img/badge.png'
+    body: data.body,
+    icon: data.icon || 'img/pengu.jpg'
   };
-
-  event.waitUntil(
-    self.registration.showNotification(title, options)
-  );
+  event.waitUntil(self.registration.showNotification(title, options));
 });
