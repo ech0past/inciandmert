@@ -245,26 +245,34 @@ html, body {
     }
   }
 </style>
+<script>
+  const slides = document.getElementById('slides');
+  const slideCount = slides.children.length;
+  let index = 0;
+  let interval = setInterval(nextSlide, 10000);
 
-  <script>
-    const slides = document.getElementById('slides');
-    const slideCount = slides.children.length;
-    let index = 0;
-    let interval = setInterval(nextSlide, 10000);
+  function getSlideWidth() {
+    return document.querySelector('.slider').clientWidth;
+  }
 
-    function showSlide(i) {
-      index = (i + slideCount) % slideCount;
-      slides.style.transform = `translateX(-${index * 400}px)`;
-    }
+  function showSlide(i) {
+    index = (i + slideCount) % slideCount;
+    const slideWidth = getSlideWidth();
+    slides.style.transform = `translateX(-${index * slideWidth}px)`;
+  }
 
-    function nextSlide() {
-      showSlide(index + 1);
-    }
+  function nextSlide() {
+    showSlide(index + 1);
+  }
 
-    function prevSlide() {
-      showSlide(index - 1);
-    }
-  </script>
+  function prevSlide() {
+    showSlide(index - 1);
+  }
+
+  window.addEventListener("resize", () => {
+    showSlide(index); // ekran boyutu değişirse kaymayı düzelt
+  });
+</script>
 
 </body>
 </html>
