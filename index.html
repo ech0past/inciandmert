@@ -51,12 +51,10 @@ html, body {
   position: relative;
   z-index: 2;
 }
-
-    .slider {
+.slider {
   width: 100%;
   max-width: 400px;
-  height: auto;
-  aspect-ratio: 1 / 1;
+  height: 400px;
   overflow: hidden;
   position: relative;
 }
@@ -68,23 +66,16 @@ html, body {
 }
 
 .slide {
+  flex: 0 0 100%;
+  height: 400px;
   position: relative;
-  min-width: 100%;
-  height: auto;
 }
-
 .slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   aspect-ratio: 1 / 1;
 }
-
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
 
     .caption {
       position: absolute;
@@ -244,8 +235,7 @@ html, body {
       width: 100%;
     }
   }
-</style>
-<script>
+</style><script>
   const slides = document.getElementById('slides');
   const slideCount = slides.children.length;
   let index = 0;
@@ -270,7 +260,7 @@ html, body {
   }
 
   window.addEventListener("resize", () => {
-    showSlide(index); // ekran boyutu değişirse kaymayı düzelt
+    showSlide(index);
   });
 </script>
 
