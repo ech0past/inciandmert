@@ -7,34 +7,62 @@
   <title>Mert&İnci</title>
   <style>
   
-  .intro-screen {
+.loader-screen {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(255, 255, 255, 1);
-  color: black;
-  z-index: 100000;
+  background: black;
+  z-index: 999999;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
-.intro-screen h1 {
-  font-size: 32px;
+.loader-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: zoomEffect 2s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes zoomEffect {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255,255,255,0.2);
+  border-top: 5px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
   margin-bottom: 20px;
 }
 
-.intro-screen button {
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: red;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loader-text {
   color: white;
-  font-weight: bold;
+  font-size: 18px;
+  text-shadow: 0 0 5px black;
+  z-index: 1;
+}
+
+.loader-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Ne kadar karartı istiyorsan sayıyı artır */
+  z-index: 1;
 }
   
     html, body {
@@ -283,9 +311,11 @@
 </head>
 <body>
   
-  <div class="intro-screen" id="introScreen">
-  <h1 id="introText">You don't love me.</h1>
-  <button onclick="handleIntro()" id="introButton">Ne?</button>
+<div class="loader-screen" id="loaderScreen">
+  <img src="img/inciandme.jpg" class="loader-image" alt="Yükleniyor" />
+  <div class="loader-overlay"></div>
+  <div class="spinner"></div>
+  <div class="loader-text">Pengü'nün uyanması bekleniyor...</div>
 </div>
 
 <div class="marquee-container">
@@ -352,7 +382,7 @@
     </div>
 
     <div class="modal-text" id="modalText">
-       Coming Soon
+       Ben Mert, İnci'yi seven, onunla sevgili olan dünyanın en şanslı insanıyım. İnci ile konserde tanıştık. O konsere en başta gitmeyecektim fakat dünyanın en iyi kararını verip gitmeyi tercih ettim. İnci'yi çok seviyorum, hemde çok... Bu siteyi onun mutlu olması için yaptım. Pişman mıyım? Tabi ki de pişman değilim neden pişman olayım. İnci ile 19-09-2024  tarihinde sevgili olduk ve dile kolay 1 yılımıza çok az kaldı. Ben hiçbir zaman 5 ay 10 ay 15 ay sevgiliyiz diye sevinmedim. Çünkü biliyorum ki sevgilim ile ayrılmayacağız (Umarım...). Şu hayatta bana bir şans daha verseler ve karşıma kimi koyarlarsa koysunlar ben yine de İnci ile sevgili olmayı seçerim.  Neden mi? Çünkü İnci'nin bana olan sevgisi, gözleri, yanakları (En sevdiğim yerdir kendisi), hareketleri, karakteri, konuşması, sesi ve çok daha fazlası benim için şu dünyada değişilmeyecek tek şey oldu. Ben İnci'nin herhangi bir özelliği için değil, kendisi olduğu için o bedenin içinde İnci olduğu için seviyorum. O bedenin içinde İnci yerine başka biri olsaydı yine İnci hangi bedendeyse onu severdim. Tabi bu yazdıklarım İnci'ye olan aşkımı tam olarak göstermez. İnci'yi ne kadar sevdiğimi bilmeniz mümkün değildir. Çünkü ben İnci'yi size ne kadar anlatırsam bir o kadar daha kendisine aşık oluyorum...
     </div>
   </div>
 </div>
@@ -453,7 +483,7 @@
     const modalText = document.getElementById('modalText');
 
     if(name === 'mert') {
-      modalText.textContent = "Coming Soon";
+      modalText.textContent = "Ben Mert, İnci'yi seven, onunla sevgili olan dünyanın en şanslı insanıyım. İnci ile konserde tanıştık. O konsere en başta gitmeyecektim fakat dünyanın en iyi kararını verip gitmeyi tercih ettim. İnci'yi çok seviyorum, hemde çok... Bu siteyi onun mutlu olması için yaptım. Pişman mıyım? Tabi ki de pişman değilim neden pişman olayım. İnci ile 19-09-2024  tarihinde sevgili olduk ve dile kolay 1 yılımıza çok az kaldı. Ben hiçbir zaman 5 ay 10 ay 15 ay sevgiliyiz diye sevinmedim. Çünkü biliyorum ki sevgilim ile ayrılmayacağız (Umarım...). Şu hayatta bana bir şans daha verseler ve karşıma kimi koyarlarsa koysunlar ben yine de İnci ile sevgili olmayı seçerim.  Neden mi? Çünkü İnci'nin bana olan sevgisi, gözleri, yanakları (En sevdiğim yerdir kendisi), hareketleri, karakteri, konuşması, sesi ve çok daha fazlası benim için şu dünyada değişilmeyecek tek şey oldu. Ben İnci'nin herhangi bir özelliği için değil, kendisi olduğu için o bedenin içinde İnci olduğu için seviyorum. O bedenin içinde İnci yerine başka biri olsaydı yine İnci hangi bedendeyse onu severdim. Tabi bu yazdıklarım İnci'ye olan aşkımı tam olarak göstermez. İnci'yi ne kadar sevdiğimi bilmeniz mümkün değildir. Çünkü ben İnci'yi size ne kadar anlatırsam bir o kadar daha kendisine aşık oluyorum...";
     } else if(name === 'inci') {
       modalText.textContent = "ÇOKÇOKÇOK YAKINDAAAA";
     }
@@ -531,17 +561,19 @@ window.addEventListener('resize', () => {
   moveUnderlineToActive2();
 });
 
-function handleIntro() {
-  const introText = document.getElementById('introText');
-  const introButton = document.getElementById('introButton');
-  introText.textContent = 'Şaka şaka';
-  introButton.style.display = 'none';
+setTimeout(() => {
+  const introScreen = document.getElementById('loaderScreen');
+  introScreen.style.display = 'none';
+}, 12000);
 
-  setTimeout(() => {
-    const introScreen = document.getElementById('introScreen');
-    introScreen.style.display = 'none';
-  }, 5000);
-}
+const loaderTexts = ["Pengü'nün uyanması bekleniyor...", "Elis'in cüzdandan çıkması bekleniyor...", "Mert ve İncu'nun aşkının hesaplanması bekleniyor...", "ERROR: The value of love has been calculated infinitely..."];
+let currentIndex = 0;
+const loaderTextEl = document.querySelector('.loader-text');
+
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % loaderTexts.length;
+  loaderTextEl.textContent = loaderTexts[currentIndex];
+}, 3000);
 </script>
 
 </body>
