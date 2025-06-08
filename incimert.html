@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+  <script>
+  if (localStorage.getItem('authenticated') !== 'true') {
+    window.location.href = 'index.html'; // Giriş yapılmadıysa geri gönder
+  }
+</script>
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -544,8 +549,9 @@ function selectSubcategory2(event) {
 }
 
 function moveUnderlineToActive2() {
-  const activeTab = document.querySelector('#subcategoryTabs2 .subcategory.active');
-  const underline = document.getElementById('underline2');
+  const activeTab = document.quh: 100%;
+      overflow: hidden;
+      white-spt underline = document.getElementById('underline2');
   if (!activeTab || !underline) return;
 
   const container = document.getElementById('subcategoryTabs2');
@@ -571,9 +577,18 @@ let currentIndex = 0;
 const loaderTextEl = document.querySelector('.loader-text');
 
 setInterval(() => {
-  currentIndex = (currentIndex + 1) % loaderTexts.length;
-  loaderTextEl.textContent = loaderTexts[currentIndex];
+  curTextEl.textContent = loaderTexts[currentIndex];
 }, 3000);
+  
+
+;
+  z-index: 1;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+
+
 </script>
 
 </body>
