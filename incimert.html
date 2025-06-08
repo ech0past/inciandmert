@@ -409,7 +409,7 @@
     // Giriş yapılmamışsa index.html'e yönlendir
     if (localStorage.getItem('authenticated') !== 'true') {
       window.location.href = 'index.html';
-    }
+    } else {
 
   const slides = document.getElementById('slides');
   const slideCount = slides.children.length;
@@ -589,7 +589,7 @@ setInterval(() => {
 
 @keyframes spin {
 
-
+}
 </script>
 
 </body>
