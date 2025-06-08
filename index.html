@@ -66,6 +66,8 @@
     if (user === dogruKullanici && pass === dogruSifre) {
       message.textContent = "Giriş başarılı.";
       message.className = "yesil";
+      localStorage.setItem('authenticated', 'true');
+window.location.href = 'ana.html';
       setTimeout(() => {
         window.location.href = "incimert.html";
       }, 1500);
@@ -74,6 +76,8 @@
       message.className = "kirmizi";
     }
   }
+  
+  
 </script>
 
 </body>
