@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <script>
-  if (localStorage.getItem('authenticated') !== 'true') {
-    window.location.href = 'index.html'; // Giriş yapılmadıysa geri gönder
-  }
-</script>
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -410,6 +405,12 @@
 </div>
 
 <script>
+  
+    // Giriş yapılmamışsa index.html'e yönlendir
+    if (localStorage.getItem('authenticated') !== 'true') {
+      window.location.href = 'index.html';
+    }
+
   const slides = document.getElementById('slides');
   const slideCount = slides.children.length;
   let index = 0;
