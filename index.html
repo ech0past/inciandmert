@@ -1,84 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Artık yok, bir devrin sonu...</title>
+  <title>Yeni Site</title>
   <style>
-    .yesil { color: green; }
-    .kirmizi { color: red; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #f9f9f9;
+    }
+
+    p {
+      font-size: 22px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 10px 25px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
 
-<div id="content">
-  <p>Bu site artık yok.</p>
-  <p id="timer"></p>
-  <button onclick="showLogin()">Giriş Yap</button>
-</div>
-
-<script>
-  const dogruKullanici = "zaza";
-  const dogruSifre = "zaza123";
-
-
-  const baslangicTarihi = new Date("2025-06-08T17:16:00");
-
-  function sureyiGuncelle() {
-    const simdi = new Date();
-    const fark = simdi - baslangicTarihi;
-
-    let saniye = Math.floor(fark / 1000);
-    const dakika = Math.floor(saniye / 60);
-    const saat = Math.floor(dakika / 60);
-    const gun = Math.floor(saat / 24);
-    const ay = Math.floor(gun / 30);
-
-    const kalanGun = gun % 30;
-    const kalanSaat = saat % 24;
-    const kalanDakika = dakika % 60;
-    const kalanSaniye = saniye % 60;
-
-    document.getElementById('timer').textContent =
-      `${ay} ay ${kalanGun} gün ${kalanSaat} saat ${kalanDakika} dakika ${kalanSaniye} saniye`;
-  }
-
-  setInterval(sureyiGuncelle, 1000);
-  sureyiGuncelle(); 
-
-  function showLogin() {
-    const content = document.getElementById('content');
-    content.innerHTML = `
-      <p>Giriş Yap</p>
-      <form onsubmit="handleLogin(event)">
-        <label>Kullanıcı Adı: <input type="text" id="username"></label><br><br>
-        <label>Şifre: <input type="password" id="password"></label><br><br>
-        <button type="submit">Gönder</button>
-      </form>
-      <p id="message"></p>
-    `;
-  }
-
-  function handleLogin(event) {
-    event.preventDefault();
-    const user = document.getElementById('username').value;
-    const pass = document.getElementById('password').value;
-    const message = document.getElementById('message');
-
-    if (user === dogruKullanici && pass === dogruSifre) {
-      message.textContent = "Giriş başarılı.";
-      message.className = "yesil";
-      localStorage.setItem('authenticated', 'true');
-window.location.href = 'ana.html';
-      setTimeout(() => {
-        window.location.href = "incimert.html";
-      }, 1500);
-    } else {
-      message.textContent = "Hatalı kullanıcı adı veya şifre.";
-      message.className = "kirmizi";
-    }
-  }
-  
-  
-</script>
+  <p>Şey, yeni siteme gitmek ister misin?</p>
+  <button onclick="window.location.href='https://yenisite.com'">Git</button>
 
 </body>
 </html>
