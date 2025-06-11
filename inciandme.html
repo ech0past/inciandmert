@@ -341,15 +341,13 @@ bildirim.addEventListener("click", () => {
 }); */
 
   function hataBildir(hataMesaji) {
-  fetch("https://waiting-wax-engine.glitch.me/hata", {
+  fetch("https://waiting-wax-engine.glitch.me/bildirim", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({ hata: hataMesaji })
-  }).catch(() => {
-    // Hata bile raporlanamadıysa sessiz geç
-  });
+  })
 }
 
  document.getElementById("videoButon").addEventListener("click", () => {
