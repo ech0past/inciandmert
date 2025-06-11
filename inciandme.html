@@ -350,13 +350,11 @@ bildirim.addEventListener("click", () => {
   })
 }
 
-
-  /
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(() => {
-      console.log("Service Worker kaydedildi ✅");
-    });
-  }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(() => {
+    console.log("Service Worker kaydedildi ✅");
+  });
+}
 
   
 
