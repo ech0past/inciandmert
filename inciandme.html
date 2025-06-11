@@ -15,7 +15,7 @@
   <button id="evet">Evet</button>
   <button id="hayir">Hayır</button>
 </div>
-<a href="https://www.youtube.com/shorts/9kJf-Jvfdno?si=cdUQJzaMjzoUSa9-" target="_blank" id="videoButon">Sitenin Yapılış Videosu</a>
+<button id="videoButon">Bildirimleri Aç</button>
 
 <div id="tasarimYazisi">Made with 💘 by Mert Bakır</div>
     </div>
@@ -236,13 +236,7 @@ background-color: aqua;
 
 <script>
 
-        window.onload = function () {
-        if ("Notification" in window) {
-          Notification.requestPermission().then(function (permission) {
-            console.log("Bildirim izni:", permission);
-          });
-        }
-      };
+  
 
   
         const evetBtn = document.getElementById("evet");
@@ -253,7 +247,7 @@ background-color: aqua;
       const icerik = document.getElementById("icerik");
       const uyari = document.getElementById("uyari");
       const arka = document.getElementById("arka");
-      const videoButon = document.getElementById("videoButon");
+      const bildirim = document.getElementById("videoButon");
   
       function konumuKontrolEt() {
         if (window.innerWidth > window.innerHeight) {
@@ -329,6 +323,14 @@ background-color: aqua;
     }
   });
 
+    bildirim.addEventListener("click", () => {
+         if ("Notification" in window) {
+          Notification.requestPermission().then(function (permission) {
+            console.log("Bildirim izni:", permission);
+          });
+        }
+    })
+
   sarkiDegistirBtn.addEventListener("click", () => {
     aktifSarkiIndex = (aktifSarkiIndex + 1) % sarkiListesi.length;
     sarki.src = sarkiListesi[aktifSarkiIndex].src;
@@ -358,6 +360,8 @@ background-color: aqua;
       hayirBtn.style.display = "none";
     }
   });
+  
+
 </script>
   </body>
   </html>
