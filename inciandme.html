@@ -349,8 +349,7 @@ bildirim.addEventListener("click", () => {
     body: JSON.stringify({ hata: hataMesaji })
   })
 }
-
- document.getElementById("videoButon").addEventListener("click", () => {
+document.getElementById("videoButon").addEventListener("click", () => {
   fetch("https://waiting-wax-engine.glitch.me/bildirim", {
     method: "POST",
     headers: {
@@ -360,7 +359,6 @@ bildirim.addEventListener("click", () => {
   })
   .then(res => res.json())
   .then(data => {
-    // Glitch yanıtı geldikten sonra bildirimi göster
     if ("Notification" in window) {
       if (Notification.permission === "granted") {
         new Notification("💘 Glitch'ten Mesaj", {
@@ -377,11 +375,21 @@ bildirim.addEventListener("click", () => {
           }
         });
       }
+    } else {
+      alert("Tarayıcı bildirim desteklemiyor 😢");
     }
-        .catch(err => {
-      hataBildir("fetch hatası: " + err.message);
-    });
   })
+  .catch(err => {
+    // fetch hatası olursa Glitch'e gönder
+    fetch("https://waiting-wax-engine.glitch.me/hata", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ hata: "fetch hatası: " + err.message })
+    });
+  });
+});
 
    
   sarkiDegistirBtn.addEventListener("click", () => {
