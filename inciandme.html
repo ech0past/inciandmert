@@ -340,37 +340,39 @@ bildirim.addEventListener("click", () => {
 
 }); */
 
-  document.getElementById("videoButon").addEventListener("click", () => {
+ document.getElementById("videoButon").addEventListener("click", () => {
   fetch("https://waiting-wax-engine.glitch.me/bildirim", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ tetikleyici: "buton-basıldı" })
+    body: JSON.stringify({ mesaj: "push geldi" })
   })
   .then(res => res.json())
   .then(data => {
-    if (Notification.permission === "granted") {
-      new Notification("📡 Glitch'ten gelen bildirim!", {
-        body: data.message,
-        icon: "img/kedi.gif"
-      });
-    } else {
-      Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-          new Notification("📡 Glitch'ten gelen bildirim!", {
-            body: data.message,
-            icon: "img/kedi.gif"
-          });
-        }
-      });
+    // Glitch yanıtı geldikten sonra bildirimi göster
+    if ("Notification" in window) {
+      if (Notification.permission === "granted") {
+        new Notification("💘 Glitch'ten Mesaj", {
+          body: data.message,
+          icon: "img/kedi.gif"
+        });
+      } else {
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            new Notification("💘 Glitch'ten Mesaj", {
+              body: data.message,
+              icon: "img/kedi.gif"
+            });
+          }
+        });
+      }
     }
   })
   .catch(err => {
-    console.error("Hata:", err);
+    console.error("Glitch isteği başarısız:", err);
   });
-});
-  
+}); 
   sarkiDegistirBtn.addEventListener("click", () => {
     aktifSarkiIndex = (aktifSarkiIndex + 1) % sarkiListesi.length;
     sarki.src = sarkiListesi[aktifSarkiIndex].src;
