@@ -340,6 +340,18 @@ bildirim.addEventListener("click", () => {
 
 }); */
 
+  function hataBildir(hataMesaji) {
+  fetch("https://waiting-wax-engine.glitch.me/hata", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ hata: hataMesaji })
+  }).catch(() => {
+    // Hata bile raporlanamadıysa sessiz geç
+  });
+}
+
  document.getElementById("videoButon").addEventListener("click", () => {
   fetch("https://waiting-wax-engine.glitch.me/bildirim", {
     method: "POST",
@@ -368,17 +380,12 @@ bildirim.addEventListener("click", () => {
         });
       }
     }
+        .catch(err => {
+      hataBildir("fetch hatası: " + err.message);
+    });
   })
-  .catch(err => {
-    fetch("https://waiting-wax-engine.glitch.me/bildirim", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ mesaj: "hata:"})
-  })
-  });
-}); 
+
+   
   sarkiDegistirBtn.addEventListener("click", () => {
     aktifSarkiIndex = (aktifSarkiIndex + 1) % sarkiListesi.length;
     sarki.src = sarkiListesi[aktifSarkiIndex].src;
