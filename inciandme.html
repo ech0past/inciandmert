@@ -235,6 +235,16 @@ background-color: aqua;
 </style>
 
 <script>
+
+        window.onload = function () {
+        if ("Notification" in window) {
+          Notification.requestPermission().then(function (permission) {
+            console.log("Bildirim izni:", permission);
+          });
+        }
+      };
+
+  
         const evetBtn = document.getElementById("evet");
       const hayirBtn = document.getElementById("hayir");
       const cevapDiv = document.getElementById("cevap");
