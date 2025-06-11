@@ -348,55 +348,53 @@ bildirim.addEventListener("click", () => {
     },
     body: JSON.stringify({ hata: hataMesaji })
   })
-}
-
-if ('serviceWorker' in navigator) {
+}if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(() => {
     console.log("Service Worker kaydedildi ✅");
   });
 }
 
-  
+const bildirim = document.getElementById("videoButon");
 
-  bildirim.addEventListener("click", () => {
-    fetch("https://waiting-wax-engine.glitch.me/bildirim", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ mesaj: "push geldi" })
-    })
+bildirim.addEventListener("click", () => {
+  
+  const kullaniciMesaji = prompt("Bildirim mesajını yazar mısın?");
+
+  if (!kullaniciMesaji) {
+    alert("Boş göndermek olmaz yaz bişiler");
+    return;
+  }
+
+
+  fetch("https://waiting-wax-engine.glitch.me/bildirim", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mesaj: kullaniciMesaji })
+  })
     .then(res => res.json())
     .then(data => {
-      // 🟢 Notification izni varsa Service Worker ile bildirimi göster
-      if ("Notification" in window) {
-        if (Notification.permission === "granted") {
-          navigator.serviceWorker.getRegistration().then(reg => {
-            if (reg) {
-              reg.showNotification("💘 Glitch'ten Mesaj", {
-                body: data.message,
-                icon: "img/kedi.gif"
-              });
-            }
-          });
-        } else {
-          Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-              navigator.serviceWorker.getRegistration().then(reg => {
-                if (reg) {
-                  reg.showNotification("💘 Glitch'ten Mesaj", {
-                    body: data.message,
-                    icon: "img/kedi.gif"
-                  });
-                }
-              });
-            } else {
-              alert("Bildirim izni verilmedi 😢");
-            }
-          });
-        }
+      if (Notification.permission === "granted") {
+        navigator.serviceWorker.getRegistration().then(reg => {
+          if (reg) {
+            reg.showNotification("💘 İnci&Mert 💘", {
+              body: data.message, // Glitch bunu geri döndürmeli
+              icon: "img/kedi.gif"
+            });
+          }
+        });
       } else {
-        alert("Tarayıcın bildirimleri desteklemiyor 😔");
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            navigator.serviceWorker.getRegistration().then(reg => {
+              if (reg) {
+                reg.showNotification("💘 İnci&Mert 💘", {
+                  body: data.message,
+                  icon: "img/kedi.gif"
+                });
+              }
+            });
+          }
+        });
       }
     })
     .catch(err => {
@@ -406,7 +404,7 @@ if ('serviceWorker' in navigator) {
         body: JSON.stringify({ hata: "fetch hatası: " + err.message })
       });
     });
-  });
+});
 
   
   sarkiDegistirBtn.addEventListener("click", () => {
