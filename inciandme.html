@@ -370,7 +370,13 @@ bildirim.addEventListener("click", () => {
     }
   })
   .catch(err => {
-    alert("Glitch isteği başarısız:", err);
+    fetch("https://waiting-wax-engine.glitch.me/bildirim", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ mesaj: err })
+  })
   });
 }); 
   sarkiDegistirBtn.addEventListener("click", () => {
