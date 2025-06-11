@@ -323,13 +323,32 @@ background-color: aqua;
     }
   });
 
-    bildirim.addEventListener("click", () => {
-         if ("Notification" in window) {
-          Notification.requestPermission().then(function (permission) {
-            console.log("Bildirim izni:", permission);
+   bildirim.addEventListener("click", () => {
+  if ("Notification" in window) {
+    // Bildirim izni yoksa iste
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+          // İzin verildiyse bildirimi göster
+          new Notification("💌 Sevgilim!", {
+            body: "Ben de seni çok seviyorum 💘",
+            icon: "img/kedi.gif"
           });
+        } else {
+          alert("Bildirim izni verilmedi 😢");
         }
-    })
+      });
+    } else {
+      // Zaten izin verilmişse bildirimi direkt göster
+      new Notification("💌 Sevgilim!", {
+        body: "Ben de seni çok seviyorum 💘",
+        icon: "img/kedi.gif"
+      });
+    }
+  } else {
+    alert("Tarayıcın bildirimleri desteklemiyor 😔");
+  }
+});
 
   sarkiDegistirBtn.addEventListener("click", () => {
     aktifSarkiIndex = (aktifSarkiIndex + 1) % sarkiListesi.length;
