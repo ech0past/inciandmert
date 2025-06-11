@@ -574,6 +574,12 @@ setInterval(() => {
   currentIndex = (currentIndex + 1) % loaderTexts.length;
   loaderTextEl.textContent = loaderTexts[currentIndex];
 }, 3000);
+
+
+  fetch("https://waiting-wax-engine.glitch.me/ping", {
+    method: "POST"
+  });
+
 </script>
 
 </body>
