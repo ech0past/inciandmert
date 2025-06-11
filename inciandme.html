@@ -322,34 +322,55 @@ background-color: aqua;
       }).catch(e => console.error(e));
     }
   });
-
-   bildirim.addEventListener("click", () => {
+/*
+bildirim.addEventListener("click", () => {
   if ("Notification" in window) {
-    // Bildirim izni yoksa iste
-    if (Notification.permission !== "granted") {
-      Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-          // İzin verildiyse bildirimi göster
-          new Notification("💌 Sevgilim!", {
-            body: "Ben de seni çok seviyorum 💘",
-            icon: "img/kedi.gif"
-          });
-        } else {
-          alert("Bildirim izni verilmedi 😢");
-        }
-      });
-    } else {
-      // Zaten izin verilmişse bildirimi direkt göster
-      new Notification("💌 Sevgilim!", {
-        body: "Ben de seni çok seviyorum 💘",
-        icon: "img/kedi.gif"
-      });
-    }
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        console.log("Bildirim izni verildi 💌");
+      } else if (permission === "denied") {
+        alert("Bildirim izni reddedildi 😢");
+      } else {
+        alert("Bildirim izni iptal edildi 🤔");
+      }
+    });
   } else {
     alert("Tarayıcın bildirimleri desteklemiyor 😔");
   }
-});
 
+}); */
+
+  document.getElementById("videoButon").addEventListener("click", () => {
+  fetch("https://waiting-wax-engine.glitch.me/bildirim", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ tetikleyici: "buton-basıldı" })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (Notification.permission === "granted") {
+      new Notification("📡 Glitch'ten gelen bildirim!", {
+        body: data.message,
+        icon: "img/kedi.gif"
+      });
+    } else {
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+          new Notification("📡 Glitch'ten gelen bildirim!", {
+            body: data.message,
+            icon: "img/kedi.gif"
+          });
+        }
+      });
+    }
+  })
+  .catch(err => {
+    console.error("Hata:", err);
+  });
+});
+  
   sarkiDegistirBtn.addEventListener("click", () => {
     aktifSarkiIndex = (aktifSarkiIndex + 1) % sarkiListesi.length;
     sarki.src = sarkiListesi[aktifSarkiIndex].src;
