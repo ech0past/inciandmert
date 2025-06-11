@@ -375,7 +375,7 @@ bildirim.addEventListener("click", () => {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ mesaj: err })
+    body: JSON.stringify({ mesaj: "hata: "+err+""})
   })
   });
 }); 
