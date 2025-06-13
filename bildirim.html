@@ -50,13 +50,13 @@
       });
 
       // Sunucuya abone gönder
-      await fetch("https://bildirim.repl.co/abone", {
+      await fetch("https://bildirim-zr3p.onrender.com/abone", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(abone)
       });
 
-        await fetch("https://bildirim.repl.co/hata", {
+        await fetch("https://bildirim-zr3p.onrender.com/hata", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ hata: `💾 Abone kaydı yollandı: ${abone.endpoint}` })
@@ -70,7 +70,7 @@
       const mesaj = prompt("Göndermek istediğin bildirim mesajı:");
       if (!mesaj) return;
 
-      const res = await fetch("https://bildirim.repl.co/bildirim", {
+      const res = await fetch("https://bildirim-zr3p.onrender.com/bildirim", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ mesaj })
