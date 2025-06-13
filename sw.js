@@ -2,7 +2,7 @@ self.addEventListener("push", function (event) {
   const data = event.data.json();
   const options = {
     body: data.body,
-    icon: data.icon || "https://cdn-icons-png.flaticon.com/512/616/616408.png",
+    icon: data.icon || "https://ech0past.github.io/img/inciandme.jpg",
   };
 
   event.waitUntil(
