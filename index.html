@@ -65,15 +65,37 @@
   z-index: 1;
 }
   
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: linear-gradient(180deg, aqua 0%, darkblue 100%);
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      background-size: cover;
-      font-family: Arial, sans-serif;
+html, body {
+  margin: 0;
+  padding: 0;
+  background: url("arkaplan.jpeg") no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+}
+
+
+  .heart {
+    position: fixed;
+    top: -30px;
+    font-size: 2rem;
+    animation: fall 6s linear forwards;
+    z-index: 0; /* Kalpler arkada */
+    pointer-events: none; /* Kalpler tıklamayı engellemesin */
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(100vh);
+      opacity: 0;
     }
+  }
+
+  .icerik {
+    position: relative;
+    z-index: 1; /* İçerik öne çıkar */
+    padding: 2rem;
+    text-align: center;
+  }
 
     .marquee-container {
       width: 100%;
@@ -579,7 +601,18 @@ setInterval(() => {
   fetch("https://waiting-wax-engine.glitch.me/ping", {
     method: "POST"
   });
+  const kalpSeti = ["❤️", "💖", "💕", "💘", "💗"];
 
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = kalpSeti[Math.floor(Math.random() * kalpSeti.length)];
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+
+  setInterval(createHeart, 400);
 </script>
 
 </body>
