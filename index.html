@@ -75,6 +75,7 @@ html, body {
     linear-gradient(45deg, #fdf0f3 25%, transparent 25%);
   background-size: 50px 50px;
   background-color: #ffe6eb;
+  font-family: 'Arial', sans-serif;
 }
 
 .stars {
@@ -265,11 +266,14 @@ html, body {
     .spotify-player {
       margin: 30px auto;
       width: 400px;
+      z-index: 2;
+      
     }
 
     @media (max-width: 400px) {
       .spotify-player {
         width: 100%;
+        z-index: 2;
       }
     }
 
@@ -367,11 +371,6 @@ html, body {
   <div class="loader-text">Pengü'nün uyanması bekleniyor...</div>
 </div>
 
-<div class="marquee-container">
-  <div class="marquee-text">
-    MERT ❤️ İNCİ — Bizim sevgimiz Ferrari, sizinkisi taksitle alınmış vosvos! 🐧❤️ 19.09.2024
-  </div>
-</div>
 
 <div class="announcement-section">
   <div class="nav-button" onclick="prevSlide()">&lt;</div>
