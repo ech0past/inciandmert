@@ -116,28 +116,38 @@ html, body {
     padding: 2rem;
     text-align: center;
   }
+.pembeust {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 10px 0;
+  background: rgba(255, 120, 255, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .pembeust {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-      padding: 10px 0;
-      background: rgba(255, 120, 255, 1);
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 9999;
-    }
+.kalp1,
+.kalp2 {
+  font-size: 23px;
+  font-weight: bold;
+  color: white;
+  width: 50px;
+  text-align: center;
+}
 
-    .ust-yazi {
-      font-size: 23px;
-      font-weight: bold;
-      color: white;
-      justify-content: center;
-      text-align: center;
-      font-family: 'Pacificy', cursive;
-    }
+.ust-yazi {
+  font-size: 23px;
+  font-weight: bold;
+  color: white;
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  flex-grow: 1;
+}
 
 
     .announcement-section {
@@ -229,7 +239,7 @@ html, body {
       position: relative;
       width: 120px;
       height: 120px;
-      border: 3px solid pink;
+      border: 3px solid rgba(255, 120, 255, 1);
       border-radius: 5px;
       overflow: hidden;
       cursor: pointer;
@@ -359,7 +369,7 @@ html, body {
   </style>
 </head>
 <body>
-  <div class="stars"></div>
+
 <div class="loader-screen" id="loaderScreen">
   <img src="img/inciandme.jpg" class="loader-image" alt="Yükleniyor" />
   <div class="loader-overlay"></div>
@@ -367,8 +377,10 @@ html, body {
   <div class="loader-text">Pengü'nün uyanması bekleniyor...</div>
 </div>
 
-<div class= "pembeust">
-<div class= "ust-yazi">Mert & İnci</div>
+<div class="pembeust">
+  <div class="kalp1">💖</div>
+<div class="ust-yazi">Mert & İnci</div>
+<div class="kalp2">💖</div>
 </div>
 
 <div class="announcement-section">
