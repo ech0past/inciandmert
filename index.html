@@ -66,12 +66,29 @@
   z-index: 1;
 }
   
-html, body {
+html, body {  
   margin: 0;
-  padding: 0;
-  background: url("arkaplan.jpeg") no-repeat center center fixed;
-  background-size: cover;
-  overflow: hidden;
+  background:
+    linear-gradient(135deg, #fdf0f3 25%, transparent 25%) -25px 0,
+    linear-gradient(225deg, #fdf0f3 25%, transparent 25%) -25px 0,
+    linear-gradient(315deg, #fdf0f3 25%, transparent 25%),
+    linear-gradient(45deg, #fdf0f3 25%, transparent 25%);
+  background-size: 50px 50px;
+  background-color: #ffe6eb;
+}
+
+.stars {
+  width: 100%;
+  height: 100%;
+  background: repeating-radial-gradient(circle, white 1px, transparent 2px);
+  background-size: 4px 4px;
+  animation: twinkle 2s infinite alternate;
+  opacity: 0.3;
+}
+
+@keyframes twinkle {
+  from { background-position: 0 0; }
+  to { background-position: 4px 4px; }
   font-family: 'Arial', sans-serif;
 }
 
@@ -342,7 +359,7 @@ html, body {
   </style>
 </head>
 <body>
-  
+  <div class="stars"></div>
 <div class="loader-screen" id="loaderScreen">
   <img src="img/inciandme.jpg" class="loader-image" alt="Yükleniyor" />
   <div class="loader-overlay"></div>
@@ -394,7 +411,7 @@ html, body {
 
 <div class="spotify-player">
   <iframe 
-    src="https://open.spotify.com/embed/playlist/1tK436Zb665ECg5WEASjba"
+    src="https://open.spotify.com/embed/playlist/3njrGDt15AkuWoZVcvw7SS"
     width="400" 
     height="300" 
     frameborder="0" 
