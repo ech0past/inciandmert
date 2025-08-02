@@ -1,0 +1,650 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mert&İnci</title>
+  <style>
+  
+.loader-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: black;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.loader-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: zoomEffect 2s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes zoomEffect {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255,255,255,0.2);
+  border-top: 5px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loader-text {
+  color: white;
+  font-size: 18px;
+  text-shadow: 0 0 5px black;
+  z-index: 1;
+}
+
+.loader-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Ne kadar karartı istiyorsan sayıyı artır */
+  z-index: 1;
+}
+  
+html, body {  
+  margin: 0;
+  background:
+    linear-gradient(135deg, #fdf0f3 25%, transparent 25%) -25px 0,
+    linear-gradient(225deg, #fdf0f3 25%, transparent 25%) -25px 0,
+    linear-gradient(315deg, #fdf0f3 25%, transparent 25%),
+    linear-gradient(45deg, #fdf0f3 25%, transparent 25%);
+  background-size: 50px 50px;
+  background-color: #ffe6eb;
+  font-family: 'Arial', sans-serif;
+}
+
+.stars {
+  width: 100%;
+  height: 100%;
+  background: repeating-radial-gradient(circle, white 1px, transparent 2px);
+  background-size: 4px 4px;
+  animation: twinkle 2s infinite alternate;
+  opacity: 0.3;
+}
+
+@keyframes twinkle {
+  from { background-position: 0 0; }
+  to { background-position: 4px 4px; }
+  font-family: 'Arial', sans-serif;
+}
+
+
+  .heart {
+    position: fixed;
+    top: -30px;
+    font-size: 2rem;
+    animation: fall 6s linear forwards;
+    z-index: 0; /* Kalpler arkada */
+    pointer-events: none; /* Kalpler tıklamayı engellemesin */
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  .icerik {
+    position: relative;
+    z-index: 1; /* İçerik öne çıkar */
+    padding: 2rem;
+    text-align: center;
+  }
+
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      padding: 10px 0;
+      background: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+    }
+
+    .marquee-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+      font-size: 20px;
+      font-weight: bold;
+      color: aqua;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+
+    .announcement-section {
+      width: 100%;
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav-button {
+      width: 40px;
+      height: 400px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      z-index: 2;
+    }
+
+    .slider {
+      z-index: 1;
+      width: 100%;
+      max-width: 400px;
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slides {
+      z-index: 1;
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+      height: 400px;
+      position: relative;
+        z-index: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+        z-index: 1;
+    }
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-height: 50%; /* Taşmaması için en fazla yarısını kaplasın */
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  overflow-y: auto; /* <-- Taşarsa scroll bar çıksın */
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 2;
+
+}
+
+    .categories {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .category {
+      z-index: 2;
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border: 3px solid aqua;
+      border-radius: 5px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .category img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: 1;
+    }
+
+    .category-name {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      z-index: 2;
+      text-align: center;
+      pointer-events: none;
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+                   -1px 1px 0 #000, 1px 1px 0 #000;
+      user-select: none;
+    }
+
+    .spotify-player {
+      margin: 30px auto;
+      width: 400px;
+      z-index: 2;
+      
+    }
+
+    @media (max-width: 400px) {
+      .spotify-player {
+        width: 100%;
+        z-index: 2;
+      }
+    }
+
+    /* Modal Stilleri */
+        .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+    }
+
+    .modal-content {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      width: 80%;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      transform: scale(0.8);
+      opacity: 0;
+      animation: modalOpen 0.4s ease forwards;
+      user-select: none;
+    }
+
+    @keyframes modalOpen {
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: black;
+      cursor: pointer;
+    }
+
+    /* Alt kategori sekmesi için stil */
+    .subcategory-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 20px;
+      position: relative;
+      border-bottom: 2px solid gray;
+    }
+
+    .subcategory {
+      font-weight: bold;
+      font-size: 18px;
+      color: gray;
+      padding-bottom: 5px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .subcategory.active {
+      color: black;
+    }
+
+    .underline {
+      position: absolute;
+      bottom: -2px;
+      height: 3px;
+      width: 50px;
+      background-color: black;
+      border-radius: 2px;
+      transition: left 0.3s ease;
+    }
+
+    .modal-text {
+      font-size: 16px;
+      color: #222;
+      line-height: 1.4;
+      text-align: center;
+      min-height: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+<div class="loader-screen" id="loaderScreen">
+  <img src="img/inciandme.jpg" class="loader-image" alt="Yükleniyor" />
+  <div class="loader-overlay"></div>
+  <div class="spinner"></div>
+  <div class="loader-text">Pengü'nün uyanması bekleniyor...</div>
+</div>
+
+<div class="marquee-container">
+  <div class="marquee-text">
+    MERT ❤️ İNCİ — Bizim sevgimiz Ferrari, sizinkisi taksitle alınmış vosvos! 🐧❤️ 19.09.2024
+  </div>
+</div>
+
+<div class="announcement-section">
+  <div class="nav-button" onclick="prevSlide()">&lt;</div>
+  <div class="slider">
+    <div class="slides" id="slides">
+      <div class="slide">
+        <img src="img/pengu.jpg" alt="Duyuru 1" />
+        <div class="caption">🐧PENGÜ🐧</div>
+      </div>
+      <div class="slide">
+        <img src="img/favfoto.PNG" alt="Duyuru 2" />
+        <div class="caption" id="love-counter-caption"></div>
+      </div>
+      <div class="slide">
+        <img src="img/ilkfoto.jpg" alt="Duyuru 3" />
+        <div class="caption">First Date ❤️ - 🎧 Fikrimin İnce Gülü</div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-button" onclick="nextSlide()">&gt;</div>
+</div>
+
+<div class="categories">
+  <div class="category" onclick="openModal()">
+    <img src="img/incimerdo.jpg" alt="Kategori 1" />
+    <span class="category-name">MERT&İNCUUU</span>
+  </div>
+  <div class="category" onclick="openModal2()">
+  <img src="img/elis.jpg" alt="Kategori 2" />
+  <span class="category-name">JOJUGLARIMIZ</span>
+</div>
+  <div class="category" onclick="location.href='login.html'">
+    <img src="img/secret.jpg" alt="SECRET!!" />
+    <span class="category-name">SECRET!!</span>
+  </div>
+</div>
+
+<div class="spotify-player">
+  <iframe 
+    src="https://open.spotify.com/embed/playlist/3njrGDt15AkuWoZVcvw7SS"
+    width="400" 
+    height="300" 
+    frameborder="0" 
+    allowtransparency="true"  
+    allow="encrypted-media">
+  </iframe>
+</div>
+
+<div id="modalOverlay" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close-button" onclick="closeModal(event)">×</span>
+
+    <div class="subcategory-tabs" id="subcategoryTabs">
+      <div class="subcategory active" data-name="mert" onclick="selectSubcategory(event)">Mert</div>
+      <div class="subcategory" data-name="inci" onclick="selectSubcategory(event)">İnci</div>
+      <div class="underline" id="underline"></div>
+    </div>
+
+    <div class="modal-text" id="modalText">
+       Ben Mert, İnci'yi seven, onunla sevgili olan dünyanın en şanslı insanıyım. İnci ile konserde tanıştık. O konsere en başta gitmeyecektim fakat dünyanın en iyi kararını verip gitmeyi tercih ettim. İnci'yi çok seviyorum, hemde çok... Bu siteyi onun mutlu olması için yaptım. Pişman mıyım? Tabi ki de pişman değilim neden pişman olayım. İnci ile 19-09-2024  tarihinde sevgili olduk ve dile kolay 1 yılımıza çok az kaldı. Ben hiçbir zaman 5 ay 10 ay 15 ay sevgiliyiz diye sevinmedim. Çünkü biliyorum ki sevgilim ile ayrılmayacağız (Umarım...). Şu hayatta bana bir şans daha verseler ve karşıma kimi koyarlarsa koysunlar ben yine de İnci ile sevgili olmayı seçerim.  Neden mi? Çünkü İnci'nin bana olan sevgisi, gözleri, yanakları (En sevdiğim yerdir kendisi), hareketleri, karakteri, konuşması, sesi ve çok daha fazlası benim için şu dünyada değişilmeyecek tek şey oldu. Ben İnci'nin herhangi bir özelliği için değil, kendisi olduğu için o bedenin içinde İnci olduğu için seviyorum. O bedenin içinde İnci yerine başka biri olsaydı yine İnci hangi bedendeyse onu severdim. Tabi bu yazdıklarım İnci'ye olan aşkımı tam olarak göstermez. İnci'yi ne kadar sevdiğimi bilmeniz mümkün değildir. Çünkü ben İnci'yi size ne kadar anlatırsam bir o kadar daha kendisine aşık oluyorum...
+    </div>
+  </div>
+</div>
+
+<!-- 2. Kategori Modal HTML -->
+<div id="modalOverlay2" class="modal-overlay" onclick="closeModal2(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close-button" onclick="closeModal2(event)">×</span>
+
+    <div class="subcategory-tabs" id="subcategoryTabs2">
+      <div class="subcategory active" data-name="pengu" onclick="selectSubcategory2(event)">Pengü</div>
+      <div class="subcategory" data-name="elis" onclick="selectSubcategory2(event)">Elis</div>
+      <div class="underline" id="underline2"></div>
+    </div>
+
+    <div class="modal-text" id="modalText2">
+      Pengü bir penguen, evet yanlış duymadınız İnci bir penguen doğurdu.<br>Pengü 14/02/2025 tarihinde Primemall yakınlarında bir parkta doğdu. Pengü şuan annesinde kalıyor ve günün hemen hemen hepsinde uyuyor. Uyanık olduğunu görmek gerçekten çok zor...<br>Her neyse...<br>Pengü, Elis'in abisidir ve Elis onun tek kardeşidir. Pengü'yü annesi, babası, kardeşi, arkadaşları herkes çok sever. Fakat Pengü annesinden bazen zorlama, bazen de press görüyor. Press derken gerçekten press, üstten bastırılıyor. Dümdüz oluyor hayvancağız. Pengü'nün herşeyi iyi güzel ama Pengü'nün bir kusuru vardı, sadece UYUMASI...
+    </div>
+  </div>
+</div>
+
+<script>
+  const slides = document.getElementById('slides');
+  const slideCount = slides.children.length;
+  let index = 0;
+  let interval = setInterval(nextSlide, 10000);
+
+  function getSlideWidth() {
+    return document.querySelector('.slider').clientWidth;
+  }
+
+  function showSlide(i) {
+    index = (i + slideCount) % slideCount;
+    const slideWidth = getSlideWidth();
+    slides.style.transform = `translateX(-${index * slideWidth}px)`;
+  }
+
+  function nextSlide() {
+    showSlide(index + 1);
+  }
+
+  function prevSlide() {
+    showSlide(index - 1);
+  }
+
+  window.addEventListener("resize", () => {
+    showSlide(index);
+  });
+
+  function updateLoveCounter() {
+    const startDate = new Date("2024-09-19T00:20:34");
+    const now = new Date();
+    let diff = now - startDate;
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30.4375);
+    const remainingDays = Math.floor(days % 30.4375);
+
+    const display = `${months} ay, ${remainingDays} gün, ${hours % 24} saat, ${minutes % 60} dakika, ${seconds % 60} saniye ❤️`;
+    const el = document.getElementById("love-counter-caption");
+    if (el) el.textContent = display;
+  }
+
+  setInterval(updateLoveCounter, 1000);
+  updateLoveCounter();
+
+  function openModal() {
+    const modal = document.getElementById('modalOverlay');
+    modal.style.display = 'flex';
+    // İlk açılışta "Mert" seçili olsun, alt çizgi pozisyonu ayarlansın
+    setTimeout(() => {
+      moveUnderlineToActive();
+    }, 10);
+  }
+
+  function closeModal(event) {
+    const modal = document.getElementById('modalOverlay');
+    if (event.target === modal || event.target.classList.contains('close-button')) {
+      modal.style.display = 'none';
+    }
+  }
+
+  // Alt kategori seçimi
+  function selectSubcategory(event) {
+    const clicked = event.target;
+    if (!clicked.classList.contains('subcategory')) return;
+
+    const tabs = document.querySelectorAll('.subcategory');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    clicked.classList.add('active');
+
+    moveUnderlineToActive();
+
+    const name = clicked.getAttribute('data-name');
+    const modalText = document.getElementById('modalText');
+
+    if(name === 'mert') {
+      modalText.textContent = "Ben Mert, İnci'yi seven, onunla sevgili olan dünyanın en şanslı insanıyım. İnci ile konserde tanıştık. O konsere en başta gitmeyecektim fakat dünyanın en iyi kararını verip gitmeyi tercih ettim. İnci'yi çok seviyorum, hemde çok... Bu siteyi onun mutlu olması için yaptım. Pişman mıyım? Tabi ki de pişman değilim neden pişman olayım. İnci ile 19-09-2024  tarihinde sevgili olduk ve dile kolay 1 yılımıza çok az kaldı. Ben hiçbir zaman 5 ay 10 ay 15 ay sevgiliyiz diye sevinmedim. Çünkü biliyorum ki sevgilim ile ayrılmayacağız (Umarım...). Şu hayatta bana bir şans daha verseler ve karşıma kimi koyarlarsa koysunlar ben yine de İnci ile sevgili olmayı seçerim.  Neden mi? Çünkü İnci'nin bana olan sevgisi, gözleri, yanakları (En sevdiğim yerdir kendisi), hareketleri, karakteri, konuşması, sesi ve çok daha fazlası benim için şu dünyada değişilmeyecek tek şey oldu. Ben İnci'nin herhangi bir özelliği için değil, kendisi olduğu için o bedenin içinde İnci olduğu için seviyorum. O bedenin içinde İnci yerine başka biri olsaydı yine İnci hangi bedendeyse onu severdim. Tabi bu yazdıklarım İnci'ye olan aşkımı tam olarak göstermez. İnci'yi ne kadar sevdiğimi bilmeniz mümkün değildir. Çünkü ben İnci'yi size ne kadar anlatırsam bir o kadar daha kendisine aşık oluyorum...";
+    } else if(name === 'inci') {
+      modalText.textContent = "Ben İncui,iki çocuk annesiyim ve Mert'in bitanecik sevgilisiyim.Hep aşırı soğuk herkesle anlaşamayan,ilk etapta sert bı kız olduğumu söylerler.Bu doğru...AMA MERTLE İLK TANİSTİGİM GÜN ONA BU YÖNÜMU ASLA GÖSTERMEDİM oda beni tatlı komik eğlenceli kafa dengi bı kız olarak tanıdı asla aşırı kıskanç yönümü göstermedim ona sonradan yazık çocuk bı şok oldu. Aramızda bazı şeyler ters gidiyor,gitsin, herşey yanlış gitsede umarım o hiç gitmez ve her zaman benimle kalır,beni sever(zorunda).Onun herseyine aşık olduğumu fark ediyorum HERSEYİNE mesela böyle benim kötü kötü taklidimi yapio çok güldürüyor beni bu hayatta en çok ona gülüyorum bazen. anneme bile içim rahat anlatabilcegim bı çocuk siz düşünün yani.Anneme göre bı damat Muhammet Mert Bakır. Hep böyle hayal kuruyorum keşke bize gelse ona aşırı yumuşak kurabiyelerimden yapsam abimle FIFA oynasa feneri ben alicam kavgası yapsa diye.Mert bensiz yaşayamaz ben onun yaşama sevinciyim bunun oda farkında.Bazen beni çok sinir ettiginde dusunuyorum acaba mertsiz nasıl olur hayatım diye BOK GİBİ OLUR o beni çok seviyor çok düşünüyor bana değer veriyor bende aynı şekilde ona.Sanki vücudumun bı parcasu bu karamarsık yaw onsuz yarım hissedicem gibi.Umarim hep tam oluruz,İnsallah canim sevgilim mertle bir gün aynı sabaha aynı yatakta uyaniriz.";
+    }
+  }
+
+  // Alt çizgiyi aktif sekmenin altına kaydırma
+  function moveUnderlineToActive() {
+    const activeTab = document.querySelector('.subcategory.active');
+    const underline = document.getElementById('underline');
+    if (!activeTab || !underline) return;
+
+    // activeTab'ın konumunu, .subcategory-tabs içindeki offset olarak al
+    const container = document.getElementById('subcategoryTabs');
+    const containerRect = container.getBoundingClientRect();
+    const activeRect = activeTab.getBoundingClientRect();
+
+    const left = activeRect.left - containerRect.left + (activeRect.width - underline.offsetWidth)/2;
+    underline.style.left = left + 'px';
+  }
+
+  window.addEventListener('resize', () => {
+    moveUnderlineToActive();
+  });
+  
+  function openModal2() {
+  const modal = document.getElementById('modalOverlay2');
+  modal.style.display = 'flex';
+  setTimeout(() => {
+    moveUnderlineToActive2();
+  }, 10);
+}
+
+function closeModal2(event) {
+  const modal = document.getElementById('modalOverlay2');
+  if (event.target === modal || event.target.classList.contains('close-button')) {
+    modal.style.display = 'none';
+  }
+}
+
+function selectSubcategory2(event) {
+  const clicked = event.target;
+  if (!clicked.classList.contains('subcategory')) return;
+
+  const tabs = document.querySelectorAll('#subcategoryTabs2 .subcategory');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  clicked.classList.add('active');
+
+  moveUnderlineToActive2();
+
+  const name = clicked.getAttribute('data-name');
+  const modalText = document.getElementById('modalText2');
+
+  if(name === 'pengu') {
+  modalText.innerHTML = "Pengü bir penguen, evet yanlış duymadınız İnci bir penguen doğurdu.<br>Pengü 14/02/2025 tarihinde Primemall yakınlarında bir parkta doğdu. Pengü şuan annesinde kalıyor ve günün hemen hemen hepsinde uyuyor. Uyanık olduğunu görmek gerçekten çok zor...<br>Her neyse...<br>Pengü, Elis'in abisidir ve Elis onun tek kardeşidir. Pengü'yü annesi, babası, kardeşi, arkadaşları herkes çok sever. Fakat Pengü annesinden bazen zorlama, bazen de press görüyor. Press derken gerçekten press, üstten bastırılıyor. Dümdüz oluyor hayvancağız. Pengü'nün herşeyi iyi güzel ama Pengü'nün bir kusuru vardı, sadece UYUMASI...";
+  } else if(name === 'elis') {
+    modalText.innerHTML = "Hayır hayır Elis penguen veya herhangi bir hayvan değil. Olsaydı da şaşırmamanız gereken bir konu beence...<br>Anywaaays<br> Elis 01/05/2025 tarihinde doğdu. Bu sefer İnci insan doğurdu. (çok şükür) Elis, Pengü'nün kız kardeşidir. Elis şuanda Babasıyla yaşamaktadır. Babasıyla birlikte hemen hemen heryere gitmektedirler. Babası yazılı sınavı çözerken, deneme çözerken, test çözerken, ders çalışırken izlemeyi çok sever. En sevdiği aktivitedir. Aynı zamanda Elisin en sevdiği yer babasının kalem cüzdanıdır. Normalde sığmaması gerekiyor ama yeni doğduğu için sığıyor...";
+  }
+}
+
+function moveUnderlineToActive2() {
+  const activeTab = document.querySelector('#subcategoryTabs2 .subcategory.active');
+  const underline = document.getElementById('underline2');
+  if (!activeTab || !underline) return;
+
+  const container = document.getElementById('subcategoryTabs2');
+  const containerRect = container.getBoundingClientRect();
+  const activeRect = activeTab.getBoundingClientRect();
+
+  const left = activeRect.left - containerRect.left + (activeRect.width - underline.offsetWidth)/2;
+  underline.style.left = left + 'px';
+}
+
+window.addEventListener('resize', () => {
+  moveUnderlineToActive();
+  moveUnderlineToActive2();
+});
+
+setTimeout(() => {
+  const introScreen = document.getElementById('loaderScreen');
+  introScreen.style.display = 'none';
+}, 12000);
+
+const loaderTexts = ["Pengü'nün uyanması bekleniyor...", "Elis'in cüzdandan çıkması bekleniyor...", "Mert ve İncu'nun aşkının hesaplanması bekleniyor...", "ERROR: The value of love has been calculated infinitely..."];
+let currentIndex = 0;
+const loaderTextEl = document.querySelector('.loader-text');
+
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % loaderTexts.length;
+  loaderTextEl.textContent = loaderTexts[currentIndex];
+}, 3000);
+
+
+  fetch("https://waiting-wax-engine.glitch.me/ping", {
+    method: "POST"
+  });
+  const kalpSeti = ["❤️", "💖", "💕", "💘", "💗"];
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = kalpSeti[Math.floor(Math.random() * kalpSeti.length)];
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+
+  setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
