@@ -42,31 +42,55 @@
       border-top-left-radius:14px; border-top-right-radius:14px;
     }
     .env-flap::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,#ffe5bf,#ffcf8a); clip-path:polygon(0 0, 100% 0, 50% 60%); filter:brightness(1.05);}
-    .paper{
+.paper {
   --pad:22px;
-  position:absolute; left:6%; right:6%; bottom:6%; top:9%;
-  background:var(--paper); border-radius:12px; padding:var(--pad);
+  position: fixed;        /* ekranın her zaman sabit */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);  /* ortada başlar, scale ile animasyon */
+  width: 88%;
+  max-width: 480px;
+  height: 70%;            /* mobil uyumlu boyut */
+  max-height: 600px;
+  background: var(--paper);
+  border-radius: 12px;
+  padding: var(--pad);
   box-shadow: 0 10px 25px rgba(0,0,0,.15);
-  transform: translateY(65%);
-  transition: transform .9s cubic-bezier(.2,.9,.18,1.1);
-  display:flex; flex-direction:column; gap:10px; justify-content:space-between;
-  opacity:0; transition-property:transform,opacity;
-  overflow-y: auto;  /* burada scroll ekledik */
-  scrollbar-width: thin; /* Firefox için ince scrollbar */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+  opacity: 0;
+  transition: transform .6s cubic-bezier(.2,.9,.18,1.1), opacity .6s ease;
+  overflow-y: auto;
+  z-index: 999;           /* her zaman üstte */
+}
+.paper::-webkit-scrollbar {
+  width: 8px;                /* scroll genişliği */
 }
 
-/* opsiyonel: scroll bar stilini Chrome/Edge için */
-.paper::-webkit-scrollbar{
-  width:6px;
+.paper::-webkit-scrollbar-track {
+  background: #f0e6d2;       /* track rengi */
+  border-radius: 6px;
 }
-.paper::-webkit-scrollbar-thumb{
-  background:rgba(0,0,0,0.2);
-  border-radius:3px;
+
+.paper::-webkit-scrollbar-thumb {
+  background: #c49b6d;       /* kaydırıcı rengi */
+  border-radius: 6px;
+}
+
+.paper::-webkit-scrollbar-thumb:hover {
+  background: #a67c4e;
+}
+
+.envelope.open .paper {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);  /* açılınca tam ortada */
 }
     .mini-icon{align-self:center; margin-top:8px; opacity:.9; display:inline-grid; place-items:center; width:58px; height:46px; border-radius:10px; background:#fff3; transition:transform .25s ease, filter .25s ease; cursor:pointer; user-select:none;}
     .mini-icon:hover{ transform:translateY(-2px); filter:brightness(1.06);}
     .envelope.open .env-flap{ transform:rotateX(168deg);}
-    .envelope.open .paper{ transform: translateY(-6%); opacity:1;}
+    .envelope.open .paper{ transform: translate(-50%, -50%) scale(1); opacity:1;}
     .area{display:none;}
     .area.show{display:block;}
     .btn{display:inline-flex; align-items:center; gap:.6rem; background:var(--btn); color:var(--btnText); padding:12px 18px; border-radius:999px; border:none; cursor:pointer; font-weight:700; letter-spacing:.2px; box-shadow:0 8px 16px rgba(0,0,0,.15); transition:transform .08s ease, box-shadow .2s ease, opacity .3s ease;}
