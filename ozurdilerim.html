@@ -8,7 +8,7 @@
     :root{
       --bg1:#fff1f2; --bg2:#fde2e4; --ink:#1f2937; --accent:#ef476f;
       --paper:#fffaf0; --env:#f8d2a0; --env-shadow:#d9b37f; 
-      --btn:#111827; --btnText:#fff; --petal:#ff4d6d; --stem:#1f9d55; --leaf:#3bbf78;
+      --btn:#111827; --btnText:#fff;
     }
     *{box-sizing:border-box;}
     html,body{height:100%;}
@@ -43,17 +43,26 @@
     }
     .env-flap::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,#ffe5bf,#ffcf8a); clip-path:polygon(0 0, 100% 0, 50% 60%); filter:brightness(1.05);}
     .paper{
-      --pad:22px;
-      position:absolute; left:6%; right:6%; bottom:6%; top:28%;
-      background:var(--paper); border-radius:12px; padding:var(--pad);
-      box-shadow: 0 10px 25px rgba(0,0,0,.15);
-      transform: translateY(65%);
-      transition: transform .9s cubic-bezier(.2,.9,.18,1.1);
-      display:flex; flex-direction:column; gap:10px; justify-content:space-between;
-      opacity:0; transition-property:transform,opacity;
-    }
-    .paper h2{margin:0 0 8px; font-size:clamp(18px, 2.3vw, 26px);}
-    .paper p{margin:0; line-height:1.6; font-size:clamp(14px, 1.9vw, 18px);}
+  --pad:22px;
+  position:absolute; left:6%; right:6%; bottom:6%; top:9%;
+  background:var(--paper); border-radius:12px; padding:var(--pad);
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  transform: translateY(65%);
+  transition: transform .9s cubic-bezier(.2,.9,.18,1.1);
+  display:flex; flex-direction:column; gap:10px; justify-content:space-between;
+  opacity:0; transition-property:transform,opacity;
+  overflow-y: auto;  /* burada scroll ekledik */
+  scrollbar-width: thin; /* Firefox için ince scrollbar */
+}
+
+/* opsiyonel: scroll bar stilini Chrome/Edge için */
+.paper::-webkit-scrollbar{
+  width:6px;
+}
+.paper::-webkit-scrollbar-thumb{
+  background:rgba(0,0,0,0.2);
+  border-radius:3px;
+}
     .mini-icon{align-self:center; margin-top:8px; opacity:.9; display:inline-grid; place-items:center; width:58px; height:46px; border-radius:10px; background:#fff3; transition:transform .25s ease, filter .25s ease; cursor:pointer; user-select:none;}
     .mini-icon:hover{ transform:translateY(-2px); filter:brightness(1.06);}
     .envelope.open .env-flap{ transform:rotateX(168deg);}
@@ -62,97 +71,20 @@
     .area.show{display:block;}
     .btn{display:inline-flex; align-items:center; gap:.6rem; background:var(--btn); color:var(--btnText); padding:12px 18px; border-radius:999px; border:none; cursor:pointer; font-weight:700; letter-spacing:.2px; box-shadow:0 8px 16px rgba(0,0,0,.15); transition:transform .08s ease, box-shadow .2s ease, opacity .3s ease;}
     .btn:active{ transform:translateY(1px);}
-/* Flower wrap */
-.flower-wrap {
-  display: grid;
-  place-items: center;
-  margin-top: 20px;
-  height: 350px;
-}
-
-/* Sap */
-.stem {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 6px;
-  height: 0;
-  background: var(--stem);
-  border-radius: 3px;
-  transition: height 1s ease;
-  transform: translateX(-50%);
-}
-
-/* Yapraklar */
-.leaf {
-  position: absolute;
-  width: 60px;
-  height: 35px;
-  background: var(--leaf);
-  border-radius: 50% 50% 50% 0;
-  opacity: 0;
-  transform: scale(0.6);
-  transition: opacity .5s ease, transform .5s ease;
-}
-.leaf.left {
-  left: 50%;
-  bottom: 50px;
-  transform-origin: 100% 50%;
-  rotate: -45deg;
-  translate(-70%,0);
-}
-.leaf.right {
-  left: 50%;
-  bottom: 50px;
-  transform-origin: 0% 50%;
-  rotate: 45deg;
-  translate(10%,0);
-}
-
-/* Çiçek merkezi */
-.flower-center {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: #ffd166;
-  border-radius: 50%;
-  transition: width .5s ease, height .5s ease;
-  transform: translateX(-50%);
-}
-
-/* Petals */
-.petals {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 0;
-  height: 0;
-  transform: translateX(-50%);
-}
-.petal {
-  position: absolute;
-  width: 40px;
-  height: 60px;
-  background: var(--petal);
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(0.2);
-  transition: opacity .5s ease .3s, transform .5s ease .3s;
-}
-.p1{transform: rotate(0deg) translateY(-20px) scale(0.2);}
-.p2{transform: rotate(60deg) translateY(-20px) scale(0.2);}
-.p3{transform: rotate(120deg) translateY(-20px) scale(0.2);}
-.p4{transform: rotate(180deg) translateY(-20px) scale(0.2);}
-.p5{transform: rotate(240deg) translateY(-20px) scale(0.2);}
-.p6{transform: rotate(300deg) translateY(-20px) scale(0.2);}
-
-/* Büyüme animasyonu */
-.grow .stem {height: 120px;}
-.grow .leaf {opacity: 1; transform: scale(1);}
-.grow .flower-center {width: 40px; height: 40px;}
-.grow .petal {opacity: 1; transform: scale(1);}
+    .flower-wrap{
+      display:grid; place-items:center; height:300px; margin-top:10px;
+    }
+    #surpriseGif{
+      display:none; width:200px; height:auto;
+    }
+    .note-line{
+      margin-top:6px;
+      font-weight:600;
+      text-align:center;
+      opacity:0;
+      transition:opacity .6s ease 0.3s;
+    }
+    .show-note{opacity:1;}
     .credits{opacity:.55; text-align:center; font-size:12px; margin-top:18px;}
   </style>
 </head>
@@ -192,30 +124,8 @@
         </button>
       </div>
     </div>
-<div class="flower-wrap">
-  <div id="flower" class="flower">
-    <!-- Sap -->
-    <div class="stem"></div>
-    <!-- Yapraklar -->
-    <div class="leaf left"></div>
-    <div class="leaf right"></div>
-    <!-- Çiçek merkezi -->
-    <div class="flower-center"></div>
-    <!-- Yapraklar (petals) -->
-    <div class="petals">
-      <div class="petal p1"></div>
-      <div class="petal p2"></div>
-      <div class="petal p3"></div>
-      <div class="petal p4"></div>
-      <div class="petal p5"></div>
-      <div class="petal p6"></div>
-    </div>
-  </div>
-</div>
-  </div>
-  <div id="noteLine" class="note-line"></div>
-</div>
-      </div>
+    <div class="flower-wrap">
+      <img id="surpriseGif" src="cicek.png" />
       <div id="noteLine" class="note-line"></div>
     </div>
     <audio id="music" preload="auto">
@@ -223,63 +133,56 @@
       <source src="song.ogg" type="audio/ogg" />
     </audio>
   </section>
-  <p class="credits">Kod: tek HTML/CSS/JS. Yazıları, müziği ve renkleri aşağıdaki yapılandırmadan düzenleyebilirsin.</p>
+  <p class="credits">Mektuba basarak mektubu açabilirsin. Made By zaza/echopast</p>
 </div>
 </main>
 
 <script>
 const CONFIG = {
-  paper1: { title: "Sevgili İnci'ye", text: "Bu mektubu açtığında küçük bir sürpriz başlıyor. Her satırda içimden geçenleri sakladım."},
-  paper2: { title: "İkinci Not", text: "Şimdi sadece çiçeğe odaklanabilirsin."},
-  finalNote: "Seni düşündüğüm her an, içimde böyle çiçekler açıyor.",
+  paper1: { title: "AŞIĞIM ULAN AŞIK!", text: "Bu gün günlerden 24 Ağustos 2025, saat 04.44... Aşkım biricik sevgilim hayatımın anlamı uyuyor, fakat bana küs bir şekilde uyuyor. Ben ise özür niyetine bu siteyi yapıyorum. Ahh... Bu gece uyku yok. Her neyse benim sevgilime değer. Bu mektubumda yavruma olan aşkımı anlatacağım. Tarih 19 Eylül 2024, Gaziantep Kültür Yolu Festivalinde Festival Parkda Haluk Levent'in konseri vardı. Ama iki genç bu konsere gitmemişti onun yerine ailelerine Haluk Levent konserine gidicez diye yalan söyleyip buluşmuşlardı. Masal Parkı Şatosunda... Mert eşeğe biniyor, İnci şirin babayla fotoğraf çekiniyor şirin babayı çocukları yapıyorlar (ne alaka amk ben daha çözemedim) her neyse. İnci Mertden birşey bekliyordu ama Mert de o beklediği şeyi Dedüblüman konserinde yapmak istiyordu. Mert İncinin sevgili olmak için beklediğini fark edince o da hemen daha fazla beklemeden yapıştırdı 'BENİMLE ÇIKAR MISIN İNCİ' İnci ise ilk reddetti ama sonra kabul etti. 11 aylık serüven böyle başladı. Neyse hikaye kitabı yazmicam olayların nasıl başladığını bil istedim. Yavrum sen bu hayatıma girdiğin 11 aydan beri benim hayatımı da beni de çok değiştirdin. Senin sayende ilk defa sevildim sevdim. (keşke daha fazla belli etsen) Senin sayende iyi dost kötü dost ayırt ettim. Ben senin her zaman iyi gününde de kötü gününde de yanında olmaya çalıştım. Ben seni sana yemin ederim ki sadece sevgilim olarak görmüyorum ben seni yakın arkadaşım, kardeşim, bacım, karım, sevgilim, annem, ablam her türlü yerin var bende. Yavrum iyi ki varsın iyi ki benimsin. Senden hiçbir zaman ayrılmicam yani hiçbir şekilde benden kurtulamazsın her zaman sevgilim olacaksın. Belki evlilikte karı koca olmak düşünülür... Diğer mektupa geçebilirsin."},
+  paper2: { title: "ÖZÜR DİLERİM YAVRUUMMMM", text: "Yavrum ben seni üzmek istemedim. Gaziraya bindik binmeden önce aramak istedim sen istemedin. Gaziraya bindik Adliyede indiğimizde tramvay geçmiyordu ve taksi çağırdık. Taksi bizim evi bilmediği için önde de ben oturduğum için konumu açtım ve sen yazmışsın görmedim. Adam da bişi söylemedi şerefsiz. Ama neyse olan oldu haklısın birtanem binemeden önce sana yazmam gerekirdi. Yavrum bu gece benle küs uyudun dün gece sesini duyamadım bu gün sesini duyamadım ben seni çok özledim. Beni affet sevgilim özür dilerim. Lütfen bir daha küs uyumayalım. Aşağıdaki butona bir hediye koydum lütfen bas ve hediyeni gör..."},
+  finalNote: "Şey, param olmadığı için çiçek alamıyorum. Bu yüzden max bu kadar oluyor...",
   audioVolume: 0.9
 };
 
 const $ = (sel, root=document) => root.querySelector(sel);
 const env1 = $('#env1'), env2 = $('#env2'), toSecond = $('#toSecond');
-const growBtn = $('#growBtn'), flower = $('#flower'), music = $('#music'), noteLine = $('#noteLine');
-let grown = false;
+const growBtn = $('#growBtn'), music = $('#music');
 
 $('#paper1Title').textContent = CONFIG.paper1.title;
 $('#paper1Text').textContent = CONFIG.paper1.text;
 $('#paper2Title').textContent = CONFIG.paper2.title;
 $('#paper2Text').textContent = CONFIG.paper2.text;
-noteLine.textContent = CONFIG.finalNote;
+$('#noteLine').textContent = CONFIG.finalNote;
 
 // İlk mektup açma
 env1.addEventListener('click', e => {
   if(e.target.closest('#toSecond')) return;
   env1.classList.toggle('open');
 });
-// İkinci mektuba geçiş// 2. mektuba geçiş
+
+// 2. mektuba geçiş
 toSecond.addEventListener('click', e => {
   e.stopPropagation();
-  env1.parentElement.style.display = 'none'; // İlk mektup kaybolsun
-  area2.classList.add('show');               // 2. mektup görünür olsun
-  env2.style.display = 'block';             // ikinci mektup görünür
-  flower.style.display = 'none';            // çiçek gizli
-  area2.scrollIntoView({behavior:'smooth', block:'start'});
+  env1.parentElement.style.display = 'none';
+  $('#area2').classList.add('show');
+  env2.style.display = 'block';
+  $('#surpriseGif').style.display = 'none';
+  $('#area2').scrollIntoView({behavior:'smooth', block:'start'});
 });
 
 // 2. mektup aç/kapa
 env2.addEventListener('click', e => {
-  if(e.target.closest('#growBtn')) return; // butona basınca aç/kapa olmasın
-  env2.classList.toggle('open');           // tıkla aç/kapa
+  if(e.target.closest('#growBtn')) return;
+  env2.classList.toggle('open');
 });
 
+// Butona basınca GIF göster
 growBtn.addEventListener('click', async ()=>{
-  env2.style.display = 'none'; // 2. mektup kaybolsun
-  flower.style.display = 'block'; // çiçek gösterilsin
-  if(!grown){
-    flower.style.transform = 'scale(0)';
-    flower.style.opacity = '0';
-    requestAnimationFrame(()=>{
-      flower.style.transform = 'scale(1)';
-      flower.style.opacity = '1';
-      flower.classList.add('grow');
-    });
-    grown = true;
-  }
+  env2.style.display = 'none';
+  const gif = $('#surpriseGif');
+  gif.style.display = 'block';
+  $('#noteLine').classList.add('show-note');
   try{ 
     music.volume = CONFIG.audioVolume; 
     await music.play(); 
